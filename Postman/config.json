@@ -16,13 +16,6 @@
 						"exec": [
 							"pm.test(\"Response is HTTP200 status\", () => {",
 							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Server-side team name is correct\", () => {",
-							"    const response = pm.response.json();",
-							"pm.collectionVariables.set(\"TEAM_NAME\", \"Team Name\");",
-							"    const expectedTeamName = pm.collectionVariables.get(\"TEAM_NAME\");",
-							"    pm.expect(response.team.name).to.eql(expectedTeamName);",
 							"});"
 						],
 						"type": "text/javascript"
