@@ -33,7 +33,7 @@ public class People extends ArrayList<Person> {
 
   Person person3() {
     final String name = "Dakota Weathers";
-    final String netid = "Team Member netid";
+    final String netid = "dnweath";
     final String hometown = "Rapid City, South Dakota";
     final String bio = "Team Member bio";
 
