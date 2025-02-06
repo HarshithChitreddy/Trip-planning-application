@@ -15,7 +15,7 @@ public class People extends ArrayList<Person> {
 
   Person person1() {
     final String name = "Christian Calderon";
-    final String netid = "Chrisc23";
+    final String netid = "crisc23";
     final String hometown = "Team Member Hometown";
     final String bio = "My name is Christian Calderon I am currently a student at CSU majoring in Computer Science. My goal is to one day be able to use my degree to make the world a better place. I also hope to one day provide for my family and obtain financial freedom. I have had a few impressive/proud achievements: I like going to the gym and I finally was able to bench 2 plates which I am proud of, another achievement is I made a working honey pot on my Raspberry Pi, and the last achievement is building my own website for my dad’s company. A quirky or maybe just ADHD fact about me is that I always have a pen on me to fidget with when I need to focus.";
 
