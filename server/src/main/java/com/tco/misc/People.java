@@ -42,7 +42,7 @@ public class People extends ArrayList<Person> {
   }
 
   Person person4() {
-    final String name = "Team Member name";
+    final String name = "Lennox Nutall";
     final String netid = "Team Member netid";
     final String hometown = "Team Member Hometown";
     final String bio = "Team Member bio";
