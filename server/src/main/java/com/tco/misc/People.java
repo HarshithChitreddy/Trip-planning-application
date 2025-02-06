@@ -26,7 +26,7 @@ public class People extends ArrayList<Person> {
     final String name = "Kjell Falk";
     final String netid = "Team Member netid";
     final String hometown = "Team Member Hometown";
-    final String bio = "Team Member bio";
+    final String bio = "My name is Kjell, and I am studying for a degree in Computer Science after an emergent medical condition disabled me out of my ten year-long career in semiconductor manufacturing. I am a husband, and father of two daughters, and a veteran of Operation Iraqi Freedom, having served as a tank crewman (19K) in the US Army. I enjoy spending time with my daughters, and find the process of teaching them things very rewarding and fulfilling. My name is Swedish, and sounds like \"shell\" or \"chell\", but \"kell\" can be easier for some people to pronounce so I can go by that, too.";
 
     return new Person(name, netid, hometown, bio);
   }
