@@ -15,18 +15,20 @@ public class People extends ArrayList<Person> {
 
   Person person1() {
     final String name = "Christian Calderon";
-    final String netid = "Chrisc23";
-    final String hometown = "Team Member Hometown";
+    final String netid = "chrisc23";
+    final String hometown = "Denver, Colorado";
     final String bio = "My name is Christian Calderon I am currently a student at CSU majoring in Computer Science. My goal is to one day be able to use my degree to make the world a better place. I also hope to one day provide for my family and obtain financial freedom. I have had a few impressive/proud achievements: I like going to the gym and I finally was able to bench 2 plates which I am proud of, another achievement is I made a working honey pot on my Raspberry Pi, and the last achievement is building my own website for my dad’s company. A quirky or maybe just ADHD fact about me is that I always have a pen on me to fidget with when I need to focus.";
+
 
     return new Person(name, netid, hometown, bio);
   }
 
   Person person2() {
     final String name = "Kjell Falk";
-    final String netid = "Team Member netid";
+    final String netid = "kjell";
     final String hometown = "Fort Collins, Colorado";
-    final String bio = "Team Member bio";
+    final String bio = "My name is Kjell, and I am studying for a degree in Computer Science after an emergent medical condition disabled me out of my ten year-long career in semiconductor manufacturing. I am a husband, and father of two daughters, and a veteran of Operation Iraqi Freedom, having served as a tank crewman (19K) in the US Army. I enjoy spending time with my daughters, and find the process of teaching them things very rewarding and fulfilling. My name is Swedish, and sounds like \"shell\" or \"chell\", but \"kell\" can be easier for some people to pronounce so I can go by that, too.";
+
 
     return new Person(name, netid, hometown, bio);
   }
