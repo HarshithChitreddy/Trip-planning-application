@@ -10,7 +10,7 @@ public class Team {
   public Team() {
     name = "Team Name";
     number = "t41";
-    mission = "Insert your team's mission statement here! Lorem ipsum odor amet, consectetuer adipiscing elit. Sociosqu nisi ut luctus dapibus platea justo justo. Diam ridiculus sem nisi consequat senectus sagittis tempus neque. Sem faucibus netus velit odio ridiculus porta. Sit vulputate sollicitudin penatibus dolor, velit eu molestie. Semper quis velit ridiculus bibendum elit. Vel sollicitudin eu quisque ligula felis eleifend, quis in curae. Metus convallis dis pellentesque posuere et sit suspendisse potenti. Lacinia dignissim duis vel urna dignissim pellentesque litora tempor. Netus vulputate commodo dolor aptent efficitur.";
+    mission = "At CSU's CS314 Software Engineering course, we hope to create an open and collaborative GitHub wiki to document and share our knowledge of computer science concepts and software development practices we learn over the course of the semester. We are going to achieve this by working together as a team, applying industry-relevant skills, and leveraging modern tools to create high-quality, accessible resources. By sharing our insights, we aim to empower others, foster a community of learning, and prepare ourselves to be future leaders in technology.";
   }
 
 }
