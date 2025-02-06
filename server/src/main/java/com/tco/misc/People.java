@@ -35,7 +35,12 @@ public class People extends ArrayList<Person> {
     final String name = "Dakota Weathers";
     final String netid = "dnweath";
     final String hometown = "Rapid City, South Dakota";
-    final String bio = "Team Member bio";
+    final String bio = "My name is Dakota, and I am working towards a degree in Computer Science.\n" 
+                       + " I originally went to school at South Dakota State University for Microbiology,\n" 
+                       + " and worked in agricultural biotech startups for 6 years focusing on improving\n"
+                       + " animal care and crop production while limiting negative environmental impacts.\n"
+                       + " I hope to expand my skillset by obtaining this degree, and continue in a career\n"
+                       + " to help improve the environment and positively impact the livelihood of others.";
 
     return new Person(name, netid, hometown, bio);
   }
