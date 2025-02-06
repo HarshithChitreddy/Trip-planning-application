@@ -25,7 +25,7 @@ public class People extends ArrayList<Person> {
   Person person2() {
     final String name = "Kjell Falk";
     final String netid = "Team Member netid";
-    final String hometown = "Team Member Hometown";
+    final String hometown = "Fort Collins, Colorado";
     final String bio = "Team Member bio";
 
     return new Person(name, netid, hometown, bio);
