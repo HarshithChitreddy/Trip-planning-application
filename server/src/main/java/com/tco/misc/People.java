@@ -44,7 +44,7 @@ public class People extends ArrayList<Person> {
 
   Person person4() {
     final String name = "Lennox Nutall";
-    final String netid = "Team Member netid";
+    final String netid = "lennoxxx";
     final String hometown = "Brownsburg, Indiana";
     final String bio = "Hello my name is Lennox. I am all about people and finding real, authentic connections. Everybody has something that they're passionate about and I absolutely love allowing them to express that through conversation. The ability to transform your feelings into words and then into tangible ideas through individuality and a creative mind is invaluable. I truly believe that every human possesses this attribute. Currently, I am a Computer Science/Spanish Language Student at Colorado State University and one of my life's passions is videogames. All of my life I have been on the consumer side of this field where I am enjoying the finished product that someone else has built for me. Now that I'm older, I feel driven to develop my own video game. Not only for myself to appreciate, but for others to as well. It would grant me an abundance of satisfaction to see myself be able to create my ideas and share them with others.";
 
