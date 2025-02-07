@@ -55,7 +55,7 @@ public class People extends ArrayList<Person> {
     final String name = "Harshith Reddy Chitreddy";
     final String netid = "reddy17";
     final String hometown = "Team Member Hometown";
-    final String bio = "Team Member bio";
+    final String bio = "I am an international student from India, studying Computer Science at CSU. I have experience in cybersecurity and full-stack development, working with the MERN stack to build responsive and user-friendly applications. I’m passionate about using my skills to solve real-world problems and contribute to meaningful projects. I aspire to be a Software Engineer and constantly work on improving my skills. In my free time, I watch YouTube and also practice LeetCode to get better at problem-solving.";
 
     return new Person(name, netid, hometown, bio);
   }
