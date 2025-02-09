@@ -70,6 +70,7 @@ function copy_client_bundle_to_build_dir {
   echo $REPO_ROOT
   echo $BUILD_DIRECTORY_PREFIX
   mkdir -p ${BUILD_DIRECTORY_PREFIX}/client
+  mkdir -p ${BUILD_DIRECTORY_PREFIX}/bin
   cp -r ${REPO_ROOT}/client/dist ${BUILD_DIRECTORY_PREFIX}/client
 }
 
@@ -113,7 +114,57 @@ function run_server {
   check_error $?
 }
 
+function arch_dependent_echo {
+  case "$ARCH" in 
+    "x86_64")
+      echo "$1" ;;
+    "arm64" | "aarch64")
+      echo "$2" ;;
+    *)
+      >&2 echo "Unknown architecture $(uname -m). Please alert a TA about this issue." 
+      return 2 ;;
+  esac
+}
+
+function download_newman {
+  wget -qO "$1" --show-progress "$(arch_dependent_echo "$NEWMAN_BINARIES_LOCATION/$NEWMAN_X86_64" "$NEWMAN_BINARIES_LOCATION/$NEWMAN_ARM64")" 
+}
+
+function verify_newman {
+  echo "$(arch_dependent_echo "$NEWMAN_X86_64_SHA256SUM" "$NEWMAN_ARM64_SHA256SUM")  $1" | sha256sum -c --quiet - 
+}
+
+function local_newman_healthy {
+  [ -f "$LOCAL_NEWMAN" ] && verify_newman "$LOCAL_NEWMAN"  > /dev/null 2>&1
+}
+
+function set_newman {
+  ARCH="$(uname -m)"
+
+  NEWMAN_BINARIES_LOCATION="https://cs.colostate.edu/~cs314/content/binaries/newman"
+  NEWMAN_X86_64="newmancomp-x86_64"
+  NEWMAN_X86_64_SHA256SUM="180890c9eb62362c0b0fa6af7da1060c7185394fb35496b73482ab7e6bfb3792"
+  NEWMAN_ARM64="newmancomp-arm64"
+  NEWMAN_ARM64_SHA256SUM="f72ed2c63236afcdd06c1484eed07d03279682bde4085f26dea6c5c62b88ec46"
+  LOCAL_NEWMAN="$BUILD_DIRECTORY_PREFIX/bin/newman"
+  GLOBAL_NEWMAN="$(command -v newman 2> /dev/null)"
+  if ! local_newman_healthy && [ -z "$GLOBAL_NEWMAN" ]; then
+    echo "Download of newman needed..."
+    if ! download_newman "$LOCAL_NEWMAN"; then
+      rm -f "$LOCAL_NEWMAN"
+      >&2 echo "NEWMAN DOWNLOAD FAILED!"
+      >&2 echo "Exiting..."
+      exit 2
+    fi
+    verify_newman "$LOCAL_NEWMAN"
+    chmod +x "$LOCAL_NEWMAN"
+  fi
+
+  NEWMAN_BIN="${GLOBAL_NEWMAN:-$LOCAL_NEWMAN}"
+}
+
 function postman_tests {
+  set_newman
   #Count Postman Collections
   count=`ls -1 ${REPO_ROOT}/Postman/*.json 2>/dev/null | wc -l`
 
@@ -139,7 +190,7 @@ function postman_tests {
       echo ===============================================
       echo Running Collection: $filename
       echo ===============================================
-      ${REPO_ROOT}/client/node_modules/newman/bin/newman.js run $filename --env-var "BASE_URL=${BASE_URL}"
+      "$NEWMAN_BIN" run $filename --env-var "BASE_URL=${BASE_URL}"
       
       if [[ $? == 1 ]]; then
         echo
