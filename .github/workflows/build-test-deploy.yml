@@ -75,9 +75,21 @@ jobs:
 
     - name: Install server dependencies
       run: cache_dependencies server
+
+    - name: Get Qlty
+      run: prep-qlty
       
     - name: Build & test server with maven
       run: mvn -f server --global-settings server/.m2/settings.xml verify
+
+    - name: Report Qlty
+      env:
+        QLTY_COVERAGE_TOKEN: ${{ vars.QLTY_COVERAGE_TOKEN }}
+        CC_TEST_REPORTER_ID: ${{ vars.CC_REPORTER_ID }}
+        GIT_COMMIT_SHA: ${{ github.sha }} 
+        GIT_BRANCH: "main"
+        JACOCO_SOURCE_PATH: server/src/main/java
+      run: report-qlty
 
     - name: Postman tests
       env:

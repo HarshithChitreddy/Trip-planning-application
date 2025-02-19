@@ -127,7 +127,18 @@ function arch_dependent_echo {
 }
 
 function download_newman {
-  wget -qO "$1" --show-progress "$(arch_dependent_echo "$NEWMAN_BINARIES_LOCATION/$NEWMAN_X86_64" "$NEWMAN_BINARIES_LOCATION/$NEWMAN_ARM64")" 
+
+  CURL_COMMAND="$(command -v curl 2> /dev/null)"
+  WGET_COMMAND="$(command -v wget 2> /dev/null)"
+  if [ -n "$CURL_COMMAND" ]; then
+    curl -o "$1" --progress-bar "$(arch_dependent_echo "$NEWMAN_BINARIES_LOCATION/$NEWMAN_X86_64" "$NEWMAN_BINARIES_LOCATION/$NEWMAN_ARM64")"
+  elif [ -n "$WGET_COMMAND" ]; then
+    wget -qO "$1" --show-progress "$(arch_dependent_echo "$NEWMAN_BINARIES_LOCATION/$NEWMAN_X86_64" "$NEWMAN_BINARIES_LOCATION/$NEWMAN_ARM64")"
+  else
+    echo "Either the curl or wget command is required to download newman for running Postman tests!"
+    return 1
+  fi
+
 }
 
 function verify_newman {
