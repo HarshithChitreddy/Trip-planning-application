@@ -1,6 +1,6 @@
 package com.tco.misc;
 
-public class VicentyCalculator extends DistanceCalculator{
+public class VicentyCalculator implements DistanceCalculator{
     @Override
     public long between(GeographicCoordinate from, GeographicCoordinate to, double earthRadius) {
         
