@@ -1,7 +1,6 @@
 package com.tco.misc;
 
 public interface GeographicCoordinate {
-    /*
-     * Will define latRadians() and lonRadians() methods
-     */
+    public double latRadians();
+    // Will define lonRadians;
 }
