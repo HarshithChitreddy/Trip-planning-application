@@ -30,14 +30,12 @@ public class TestVincentyCalculator {
     private Geo geoTest1 = new Geo(0.0, 0.0);
     private Geo geoTest2 = new Geo(0.0, 0.0);
     private double radiusTest = 3678.0;
-
     private VincentyCalculator vincentyTest = new VincentyCalculator();
 
-    @DisplayName("dnweath: Test base calculator returns 0L")
+    @DisplayName("dnweath: Test Vincenty calculator returns 0")
     @Test
-    public void testBaseVincenty() {
+    public void testBaseVincentyCalculatorReturnsZero() {
         long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
         assertEquals(0L, actualDistance);
     }
-
 }
