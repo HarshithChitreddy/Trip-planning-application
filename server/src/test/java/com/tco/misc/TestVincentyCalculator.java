@@ -33,10 +33,11 @@ public class TestVincentyCalculator {
 
     private VincentyCalculator vincentyTest = new VincentyCalculator();
 
-    @DisplayName("dnweath: Initial test - placeholder")
+    @DisplayName("dnweath: Test base calculator returns 0L")
     @Test
     public void testBaseVincenty() {
-        assertEquals(vincentyTest.between(geoTest1, geoTest2, radiusTest), 0L);
+        long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(0L, actualDistance);
     }
 
 }
