@@ -1,5 +1,9 @@
+package com.tco.requests;
+
 public class DistancesRequests {
-    /*
-     * will handle restful API requests for each distance endpoints
-     */
+    protected String formula;
+    private double earthRadius;
+    private Distances distances;
+    private Places places;
+
 }
