@@ -16,20 +16,20 @@ public class TestDistances {
     }
 
     @Test
-    @DisplayName("Total is 0 for empty list")
+    @DisplayName("reddy17: Total is 0 for empty list")
     public void testTotalEmptyList() {
         assertEquals(0, distances.total());
     }
 
     @Test
-    @DisplayName("Total is correct for a single element")
+    @DisplayName("reddy17: Total is correct for a single element")
     public void testTotalSingleElement() {
         distances.add(100L);
         assertEquals(100, distances.total());
     }
 
     @Test
-    @DisplayName("Total is correct for multiple elements")
+    @DisplayName("reddy17: Total is correct for multiple elements")
     public void testTotalMultipleElements() {
         distances.add(100L);
         distances.add(200L);
@@ -38,7 +38,7 @@ public class TestDistances {
     }
 
     @Test
-    @DisplayName("Total is correct for large numbers")
+    @DisplayName("reddy17: Total is correct for large numbers")
     public void testTotalLargeNumbers() {
         distances.add(1000000L);
         distances.add(2000000L);
@@ -47,7 +47,7 @@ public class TestDistances {
     }
 
     @Test
-    @DisplayName("Total is correct for negative numbers")
+    @DisplayName("reddy17: Total is correct for negative numbers")
     public void testTotalNegativeNumbers() {
         distances.add(-100L);
         distances.add(200L);
