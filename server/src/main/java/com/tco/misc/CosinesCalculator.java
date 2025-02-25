@@ -6,8 +6,9 @@ import com.tco.requests.Places;
 
 public class CosinesCalculator implements DistanceCalculator {
 
-    public Long between(GeographicCoordinate start, GeographicCoordinate end, Double radius) {
+    @Override
+    public long between(GeographicCoordinate start, GeographicCoordinate end, double earthRadius) {
         // Implementation will be done in another PR
-        return null;
+        return 0L;
     }
 }
