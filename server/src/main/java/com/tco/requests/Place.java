@@ -11,7 +11,7 @@ public class Place extends HashMap<String, String> implements GeographicCoordina
     }
 
     public double lonRadians() {
-        return 0.0
+        return 0.0;
     }
 
 }
