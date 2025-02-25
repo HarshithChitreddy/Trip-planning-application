@@ -30,7 +30,7 @@ public class TestHaversineCalculator {
     private Geo geoTest1 = new Geo(0.0, 0.0);
     private Geo geoTest2 = new Geo(0.0, 0.0);
     private double radiusTest = 3678.0;
-    private haversineTest = new HaversineCalculator();
+    private HaversineCalculator haversineTest = new HaversineCalculator();
 
     @DisplayName("dnweath: Test Haversine calculator returns 0")
     @Test
