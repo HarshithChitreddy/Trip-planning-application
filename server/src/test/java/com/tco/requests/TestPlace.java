@@ -9,53 +9,54 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestPlace {
 
-    private Place testPlace;
+    private Place placeUnderTest;
+    private static final String LATITUDE = "latitude";
 
     @BeforeEach
     public void setUp() {
-        testPlace = new Place();
+        placeUnderTest = new Place();
     }
 
     // latRadians() Tests
     @Test
     @DisplayName("reddy17: latRadians() for positive latitude")
     public void testLatRadiansPositive() {
-        testPlace.put("latitude", "45.0");
+        placeUnderTest.put(LATITUDE, "45.0");
         double expected = Math.toRadians(45.0);
-        assertEquals(expected, testPlace.latRadians(), 0.0001);
+        assertEquals(expected, placeUnderTest.latRadians(), 0.0001);
     }
 
     @Test
     @DisplayName("reddy17: latRadians() for negative latitude")
     public void testLatRadiansNegative() {
-        testPlace.put("latitude", "-45.0");
+        placeUnderTest.put(LATITUDE, "-45.0");
         double expected = Math.toRadians(-45.0);
-        assertEquals(expected, testPlace.latRadians(), 0.0001);
+        assertEquals(expected, placeUnderTest.latRadians(), 0.0001);
     }
 
     @Test
     @DisplayName("reddy17: latRadians() for zero latitude")
     public void testLatRadiansZero() {
-        testPlace.put("latitude", "0.0");
+        placeUnderTest.put(LATITUDE, "0.0");
         double expected = 0.0;
-        assertEquals(expected, testPlace.latRadians(), 0.0001);
+        assertEquals(expected, placeUnderTest.latRadians(), 0.0001);
     }
 
     @Test
     @DisplayName("reddy17: latRadians() for invalid latitude")
     public void testInvalidLatitude() {
-        testPlace.put("latitude", "invalid");
-        assertThrows(NumberFormatException.class, () -> {
-            testPlace.latRadians();
-        });
+        placeUnderTest.put(LATITUDE, "invalid");
+        assertThrows(NumberFormatException.class, () -> 
+            placeUnderTest.latRadians()
+        );
     }
 
     @Test
     @DisplayName("reddy17: latRadians() for null latitude")
     public void testNullLatitude() {
-        testPlace.put("latitude", null);
-        assertThrows(NullPointerException.class, () -> {
-            testPlace.latRadians();
-        });
+        placeUnderTest.put(LATITUDE, null);
+        assertThrows(NullPointerException.class, () -> 
+            placeUnderTest.latRadians()
+        );
     }
 }
