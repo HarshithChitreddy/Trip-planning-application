@@ -6,7 +6,36 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestHaversineCalculator {
-    /*
-     * Initial test class creation
-     */
+    
+    public class Geo implements GeographicCoordinate {
+        private double lat;
+        private double lon;
+        
+        public Geo(double lat, double lon) {
+            this.lat = lat;
+            this.lon = lon;
+        }
+
+        @Override
+        public double latRadians() {
+            return lat;
+        }
+
+        @Override
+        public double lonRadians() {
+            return lon;
+        }
+    }
+
+    private Geo geoTest1 = new Geo(0.0, 0.0);
+    private Geo geoTest2 = new Geo(0.0, 0.0);
+    private double radiusTest = 3678.0;
+    private haversineTest = new HaversineCalculator();
+
+    @DisplayName("dnweath: Test Haversine calculator returns 0")
+    @Test
+    public void testBaseHaversineCalculatorReturnsZero() {
+        long actualDistance = haversineTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(0L, actualDistance);
+    }
 }
