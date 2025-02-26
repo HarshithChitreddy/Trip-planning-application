@@ -14,20 +14,14 @@ public class DistancesRequest {
     private double earthRadius;
     private Distances distances;
     private Places places;
-    private List<String> distancesList;
-
+    
     private static final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
 
+    public void buildResponse(){
 
-    public List<String> buildResponse(){
         places = new Places();
         distances = new Distances();
-        distancesList = new ArrayList<>();
-        log.trace("buildResponse -> {}", this);
 
-        if(distancesList.size() == 0){
-            System.err.println("Error: the distancesList is empty!");
-        }
-        return distancesList;
+        log.trace("buildResponse -> {}", this);
     }
 }
