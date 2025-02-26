@@ -38,15 +38,7 @@ public class TestVincentyCalculator {
         long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
         assertEquals(0L, actualDistance);
     }
-    @DisplayName("chrisc23: Test Vincenty Calculator: Equatorial Distance")
-    @Test
-    public void testLargeDistance() {
-        Geo point1 = new Geo(0.0, 0.0);
-        Geo point2 = new Geo(0.0, Math.PI / 2); 
-        long actualDistance = vincentyTest.between(point1, point2, radiusTest);
-
-        assertEquals(5777L, actualDistance);
-    }
+    
     @DisplayName("chrisc23:Test Vincenty calculator for negative degrees")
     @Test
     public void testVincentyPartialNegativedegree() {
@@ -68,11 +60,20 @@ public class TestVincentyCalculator {
 
         assertEquals(2206L, actualDistance);
     }
+    @DisplayName("chrisc23: Test Vincenty Calculator: Equatorial Distance")
+    @Test
+    public void testLarge90Distance() {
+        Geo point1 = new Geo(0.0, 0.0);
+        Geo point2 = new Geo(0.0, Math.PI / 2); // 90 degrees in radians
+        long actualDistance = vincentyTest.between(point1, point2, radiusTest);
+
+        assertEquals(5777L, actualDistance);
+    }
     @DisplayName("chrisc23: Test Vincenty Calculator: 180 degrees")
     @Test
     public void testLarge180Distance() {
         Geo point1 = new Geo(0.0, 0.0);
-        Geo point2 = new Geo(0.0, Math.PI); 
+        Geo point2 = new Geo(0.0, Math.PI); //180 degrees in radians
         long actualDistance = vincentyTest.between(point1, point2, radiusTest);
 
         assertEquals(11555L, actualDistance);
