@@ -14,93 +14,72 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.List;
 import java.util.ArrayList;
 
-public class TestDistancesRequest{
-    private Distances distances;
-    private Places places;
+public class TestDistancesRequest {
+    private Places testPlaces;
     private Place place1 = new Place();
     private Place place2 = new Place();
     private Place place3 = new Place();
     private DistancesRequest distReq;
     private double earthRadius;
     private String formula;
-
+    
     @BeforeEach
     public void setUpDR(){
         this.distReq = new DistancesRequest();
-        this.places = new Places();
+        testPlaces = new Places();
         place1.put("latitude", "0.0");
-        place1.put("longitude", "0.0");
-
+        place1.put("longitude", "90.0");
         place2.put("latitude", "0.0");
         place2.put("longitude", "0.0");
-
-        place3.put("latitude", "0.0");
+        place3.put("latitude", "-45.0");
         place3.put("longitude", "0.0");
-        //this.testPlaces = distReq.getPlaces();
-    }
-
-    // @Test
-    // @DisplayName("lennoxxx: Test for getting the formula.")
-    // public void testGetFormula(){
-    //     distReq.formula = "vincenty";
-    //     assertEquals("vincenty", distReq.getFormula(), "getFormula should return the assigned formula.");
-    // }
-    // @Test
-    // @DisplayName("lennoxxx: Test for getting the earthRadius.")
-    // public void testGetEarthRadius(){
-    //     distReq.buildResponse();
-    //     distReq.earthRadius = 3963.19;
-    //     assertEquals("3963.19", distReq.getEarthRadius(), "getEarthRadius should return the assigned earthRadius.");
-    // }
-
+    } 
+    
     @Test
     @DisplayName("lennoxxx: Test for empty list of distances.")
     public void testGetPlacesEmpty() throws BadRequestException{
-        distReq.setPlaces(places);
+        distReq.setPlaces(new Places());
         distReq.buildResponse();
+
         assertTrue(distReq.getDistances().isEmpty());
+    } 
+
+    @Test
+    @DisplayName("lennoxxx: Test for one location")
+    public void testOnePlace() throws BadRequestException {
+        testPlaces.add(place1);
+        distReq.setPlaces(testPlaces);
+        distReq.buildResponse();
+
+        assertTrue(distReq.getDistances().size() == 1);
     }
 
-    // @Test
-    // @DisplayName("lennoxxx: Test for gauging whether or not getPlaces() returns Null.")
-    // public void testGetPlacesNotNull(){
-    //     distReq.buildResponse();
-    //     assertNotNull(distReq.getPlaces(), "Calling getPlaces() should not return Null.");
-    // }
+    @Test
+    @DisplayName("lennoxxx: Test for two locations, vincenty")
+    public void testTwoPlaces() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
 
-    // @Test
-    // @DisplayName("lennoxxx: Test for gauging whether or not getDistances() returns Null.")
-    // public void testGetDistancesNotNull(){
-    //     distReq.buildResponse();
-    //     assertNotNull(distReq.getDistances(), "Calling getDistances() should not return Null.");
-    // }
+        distReq.setPlaces(testPlaces);
+        distReq.setRadius(300.0);
+        distReq.buildResponse();
 
-    // @Test
-    // @DisplayName("lennoxxx: Test for one place (vincenty).")
-    // public void testOnePlaceVin(){
-    //     distReq.formula = "vincenty";
-    //     distReq.buildResponse();
+        assertEquals(471L, distReq.getDistances().get(0));
+        assertTrue(distReq.getDistances().size() == 2);
+    }
 
-    //     assertEquals(1, distReq.getDistances().size(), "There should be one item in the distanceList");
-    //     assertEquals(0L, distReq.getDistances().get(0), "Since there is only one distance in the list, it should output zero.");
-    // }
+    @Test
+    @DisplayName("lennoxxx: Test for three locations, vincenty")
+    public void testThreePlaces() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        testPlaces.add(place3);
 
-    // @Test
-    // @DisplayName("lennoxxx: Test for invalid argument (formula).")
-    // public void testInvalidFormula(){
-    //     distReq.formula = "NoCalculator";
-    //     distReq.buildResponse();
+        distReq.setPlaces(testPlaces);
+        distReq.setRadius(300.0);
+        distReq.buildResponse();
 
-    //     assertThrows(BadRequestException.class, distReq::buildResponse, "This error case for an Invalid Argument should be handled by the BadRequestException class.");
-    // }
-
-    // @Test
-    // @DisplayName("lennoxxx: Test for null argument (formula).")
-    // public void testNullFormula(){
-    //     distReq.formula = null;
-    //     distReq.buildResponse();
-
-    //     assertThrows(BadRequestException.class, distReq::buildResponse, "This error case for a Null Argument should be handled by the BadRequestException class.");
-    // }
-
-}
+        assertTrue(distReq.getDistances().size() == 3);
+        assertEquals(236L, distReq.getDistances().get(1));
+    }
+ }
