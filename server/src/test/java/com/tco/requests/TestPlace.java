@@ -46,17 +46,13 @@ public class TestPlace {
     @DisplayName("reddy17: latRadians() for invalid latitude")
     public void testInvalidLatitude() {
         placeUnderTest.put(LATITUDE, "invalid");
-        assertThrows(NumberFormatException.class, () -> 
-            placeUnderTest.latRadians()
-        );
+        assertThrows(NumberFormatException.class, () -> placeUnderTest.latRadians());
     }
 
     @Test
     @DisplayName("reddy17: latRadians() for null latitude")
     public void testNullLatitude() {
         placeUnderTest.put(LATITUDE, null);
-        assertThrows(NullPointerException.class, () -> 
-            placeUnderTest.latRadians()
-        );
+        assertThrows(NullPointerException.class, () -> placeUnderTest.latRadians());
     }
 }
