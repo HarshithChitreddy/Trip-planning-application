@@ -49,6 +49,16 @@ public class TestCosinesCalculator {
 
         assertEquals(14309L, actualDistance, DELTA, "Distance for partial negative degrees should be approximately 14309 km");
     }
+
+    @DisplayName("kjell: Test cosines for one negative degree and one positive degree")
+    @Test
+    public void testCosinesSingleNegativeDegree() {
+        Geo geoTest3 = new Geo(Math.toRadians(60.0), Math.toRadians(-60.0)); 
+        Geo geoTest4 = new Geo(Math.toRadians(-60.0), Math.toRadians(60.0)); 
+        long actualDistance = cosinesTest.between(geoTest3, geoTest4, radiusTest);
+
+        assertEquals(20015L, actualDistance, DELTA, "Distance for lat degrees should be approximately 20015 km (= 1 radiusTest * pi)");
+    }
     
     @DisplayName("reddy17: Test CosinesCalculator for all negative degrees")
     @Test
