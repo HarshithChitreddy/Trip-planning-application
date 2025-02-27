@@ -61,6 +61,19 @@ public class TestVincentyCalculator {
 
         assertEquals(8261L, actualDistance);
     }
+
+    @DisplayName("kjell: Test Vincenty calculator for one positive degree, one negative degree")
+    @Test
+    public void testVincentySingleNegativeDegree() {
+
+        Geo geoTest3 = new Geo(Math.toRadians(60.0), Math.toRadians(-60.0));
+        Geo geoTest4 = new Geo(Math.toRadians(-60.0), Math.toRadians(60.0));
+
+        long actualDistance = vincentyTest.between(geoTest3, geoTest4, radiusTest);
+
+        assertEquals(9696L, actualDistance);
+    }
+
     @DisplayName("chrisc23:Test Haversine calculator for all negative degrees")
     @Test
     public void testVincentyAllNegativedegree() {
