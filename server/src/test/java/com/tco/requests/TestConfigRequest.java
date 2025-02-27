@@ -33,7 +33,7 @@ public class TestConfigRequest {
     @Test
     @DisplayName("base: Features list is expected length")
     public void testFeaturesLength(){
-        assertEquals(conf.getFeatures().size(), 1);
+        assertEquals(conf.getFeatures().size(), 2);
     }
 
     /*
