@@ -2,6 +2,7 @@ package com.tco.misc;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,14 +28,24 @@ public class TestVincentyCalculator {
         }
     }
 
-    private Geo geoTest1 = new Geo(0.0, 0.0);
-    private Geo geoTest2 = new Geo(0.0, 0.0);
-    private double radiusTest = 3678.0;
+    private Geo geoTest1;
+    private Geo geoTest2;
+    private double radiusTest;
     private VincentyCalculator vincentyTest = new VincentyCalculator();
+
+    @BeforeEach
+    public void setUp() {
+        radiusTest = 3678.0;
+    }
+
 
     @DisplayName("dnweath: Test Vincenty calculator returns 0")
     @Test
     public void testBaseVincentyCalculatorReturnsZero() {
+        
+        geoTest1 = new Geo(0.0, 0.0);
+        geoTest2 = new Geo(0.0, 0.0);
+
         long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
         assertEquals(0L, actualDistance);
     }
@@ -77,6 +88,46 @@ public class TestVincentyCalculator {
         long actualDistance = vincentyTest.between(point1, point2, radiusTest);
 
         assertEquals(11555L, actualDistance);
+    }
+
+    /*
+     * Testing with radius value
+     */
+
+    @DisplayName("dnweath: Test Vincenty Calculator: small radius")
+    @Test
+    public void testSmallRadius() {
+        radiusTest = 300.0;
+
+        geoTest1 = new Geo(0.0, 0.0);
+        geoTest2 = new Geo(0.0, Math.PI / 2); // 90 degrees
+
+        long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(471L, actualDistance);
+    }
+
+    @DisplayName("dnweath: Test Vincenty Calculator: large radius")
+    @Test
+    public void testLargeRadius() {
+        radiusTest = 780523.0;
+
+        geoTest1 = new Geo(0.0, 0.0);
+        geoTest2 = new Geo(0.0, Math.PI / 2); // 90 degrees
+
+        long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(1226043L, actualDistance);
+    }
+
+    @DisplayName("dnweath: Test Vincenty Calculator: multiple decimal points")
+    @Test
+    public void testRadiusManyDecimals() {
+        radiusTest = 6082.385027367614;
+
+        geoTest1 = new Geo(0.0, 0.0);
+        geoTest2 = new Geo(0.0, Math.PI / 2); // 90 degrees
+
+        long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(9554L, actualDistance);
     }
 
 }
