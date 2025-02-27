@@ -57,7 +57,7 @@ public class TestCosinesCalculator {
         Geo geoTest4 = new Geo(Math.toRadians(-60.0), Math.toRadians(60.0)); 
         long actualDistance = cosinesTest.between(geoTest3, geoTest4, radiusTest);
 
-        assertEquals(20015L, actualDistance, DELTA, "Distance for lat degrees should be approximately 20015 km (= 1 radiusTest * pi)");
+        assertEquals(16795L, actualDistance, DELTA, "Distance for 60/-60→-60/60 degrees should be approximately 16795 km = ((1 * radiusTest) * pi)");
     }
     
     @DisplayName("reddy17: Test CosinesCalculator for all negative degrees")
