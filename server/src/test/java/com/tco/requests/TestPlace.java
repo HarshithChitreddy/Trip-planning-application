@@ -1,5 +1,6 @@
 package com.tco.requests;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,4 +56,10 @@ public class TestPlace {
         placeUnderTest.put(LATITUDE, null);
         assertThrows(NullPointerException.class, () -> placeUnderTest.latRadians());
     }
+=======
+public class TestPlace {
+    /*
+     * define test methods for latRadians() and lonRadians()
+     */
+>>>>>>> main
 }
