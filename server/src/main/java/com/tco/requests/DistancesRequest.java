@@ -10,50 +10,45 @@ import com.tco.requests.Distances;
 import com.tco.requests.Places;
 import com.tco.misc.BadRequestException;
 import com.tco.misc.DistanceCalculator;
+import com.tco.misc.VincentyCalculator;
 
 public class DistancesRequest extends Request{
     protected String formula;
     protected double earthRadius;
-    private Distances distances = new Distances();
-    private Places places = new Places();
-    private DistanceCalculator calculator;
+    private Distances distances;
+    private Places places;
+    private VincentyCalculator vincentyCalculator = new VincentyCalculator();
     
     private static final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
 
     public void buildResponse() throws BadRequestException{
 
-        // this.places = new Places();
-        // this.distances = new Distances();
+        //this.places = new Places();
+        this.distances = new Distances();
+
+        if(!formula.equals("vincenty") || formula != null){
+            throw new BadRequestException();
+        }
+
+        if(!places.isEmpty()){
+            vinCal();
+        }
 
         log.trace("buildResponse -> {}", this);
 
-        // if(places.isEmpty() || places.size() == 1){
-        //     distances.add(0L);
-        // }
-        checkPlacesEmpty();
-
-        if(formula.equals("vincenty")){
-            calculator = new vincentyCalculator();
-        }
-        else if(formula.equals("haversine")){
-            calculator = new haversineCalculator();
-        }
-        else if(formula.equals("cosine")){
-            calculator = new cosineCalculator();
-        }
-        else{
-            throw new BadRequestException();
-        }
     }
 
-    private Distances checkPlacesEmpty(){
-        if(places.isEmpty()){
-            return distances;
-        }
-        return distances;
+    private void vinCal(){
+        Place from = places.get(0);
+        Place to = places.get(1);
+        distances.add(vincentyCalculator.between(from, to, earthRadius));
     }
 
     public Places getPlaces(){ return places; }
+
+    public void setPlaces(Places places){
+        this.places = places; 
+    }
 
     public Distances getDistances(){ return distances; }
 

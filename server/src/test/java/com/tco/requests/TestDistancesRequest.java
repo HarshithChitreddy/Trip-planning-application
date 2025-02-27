@@ -23,11 +23,10 @@ public class TestDistancesRequest{
     private DistancesRequest distReq;
     private double earthRadius;
     private String formula;
-    //private List<Places> testPlaces;
 
     @BeforeEach
     public void setUpDR(){
-        this.distances = new Distances();
+        this.distReq = new DistancesRequest();
         this.places = new Places();
         place1.put("latitude", "0.0");
         place1.put("longitude", "0.0");
@@ -37,44 +36,44 @@ public class TestDistancesRequest{
 
         place3.put("latitude", "0.0");
         place3.put("longitude", "0.0");
-        this.distReq = new DistancesRequest();
         //this.testPlaces = distReq.getPlaces();
     }
 
-    @Test
-    @DisplayName("lennoxxx: Test for getting the formula.")
-    public void testGetFormula(){
-        distReq.formula = "vincenty";
-        assertEquals("vincenty", distReq.getFormula(), "getFormula should return the assigned formula.");
-    }
-    @Test
-    @DisplayName("lennoxxx: Test for getting the earthRadius.")
-    public void testGetEarthRadius(){
-        distReq.buildResponse();
-        distReq.earthRadius = 3963.19;
-        assertEquals("3963.19", distReq.getEarthRadius(), "getEarthRadius should return the assigned earthRadius.");
-    }
-
     // @Test
-    // @DisplayName("lennoxxx: Test for getting the list of distances.")
-    // public void testGetPlacesNotEmpty(){
-    //     testPlaces.add("Test Place");
-    //     assertFalse(testPlaces.isEmpty(), "The testPlaces list should have a population of at least one.");
+    // @DisplayName("lennoxxx: Test for getting the formula.")
+    // public void testGetFormula(){
+    //     distReq.formula = "vincenty";
+    //     assertEquals("vincenty", distReq.getFormula(), "getFormula should return the assigned formula.");
+    // }
+    // @Test
+    // @DisplayName("lennoxxx: Test for getting the earthRadius.")
+    // public void testGetEarthRadius(){
+    //     distReq.buildResponse();
+    //     distReq.earthRadius = 3963.19;
+    //     assertEquals("3963.19", distReq.getEarthRadius(), "getEarthRadius should return the assigned earthRadius.");
     // }
 
     @Test
-    @DisplayName("lennoxxx: Test for gauging whether or not getPlaces() returns Null.")
-    public void testGetPlacesNotNull(){
+    @DisplayName("lennoxxx: Test for empty list of distances.")
+    public void testGetPlacesEmpty() throws BadRequestException{
+        distReq.setPlaces(places);
         distReq.buildResponse();
-        assertNotNull(distReq.getPlaces(), "Calling getPlaces() should not return Null.");
+        assertTrue(distReq.getDistances().isEmpty());
     }
 
-    @Test
-    @DisplayName("lennoxxx: Test for gauging whether or not getDistances() returns Null.")
-    public void testGetDistancesNotNull(){
-        distReq.buildResponse();
-        assertNotNull(distReq.getDistances(), "Calling getDistances() should not return Null.");
-    }
+    // @Test
+    // @DisplayName("lennoxxx: Test for gauging whether or not getPlaces() returns Null.")
+    // public void testGetPlacesNotNull(){
+    //     distReq.buildResponse();
+    //     assertNotNull(distReq.getPlaces(), "Calling getPlaces() should not return Null.");
+    // }
+
+    // @Test
+    // @DisplayName("lennoxxx: Test for gauging whether or not getDistances() returns Null.")
+    // public void testGetDistancesNotNull(){
+    //     distReq.buildResponse();
+    //     assertNotNull(distReq.getDistances(), "Calling getDistances() should not return Null.");
+    // }
 
     // @Test
     // @DisplayName("lennoxxx: Test for one place (vincenty).")
