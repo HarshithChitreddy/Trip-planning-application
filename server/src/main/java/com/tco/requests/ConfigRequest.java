@@ -12,7 +12,7 @@ import com.tco.misc.People;
 public class ConfigRequest extends Request {
 
     private static final transient Logger log = LoggerFactory.getLogger(ConfigRequest.class);
-
+    private List<String> formulae;
     private List<String> features;
     private Team team;
     private People people;
@@ -22,11 +22,14 @@ public class ConfigRequest extends Request {
 
         team = new Team();
         people = new People();
-
+        formulae = new ArrayList<>();
         features = new ArrayList<>();
         features.add("config");
         features.add("distances");
-
+        formulae.add("vincenty");
+        formulae.add("haversine");
+        
+        
         log.trace("buildResponse -> {}", this);
     }
 
