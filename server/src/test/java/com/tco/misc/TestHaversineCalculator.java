@@ -74,6 +74,19 @@ public class TestHaversineCalculator {
         
         assertEquals(14309L, actualDistance);
     }
+
+    @DisplayName("kjell: Test Haversine calculator for positive, one negative degree")
+    @Test
+    public void testHaversineSingleNegativeDegree() {
+
+        Geo geoTest3 = new Geo(Math.toRadians(60.0), Math.toRadians(-60.0));
+        Geo geoTest4 = new Geo(Math.toRadians(-60.0), Math.toRadians(60.0));
+
+        long actualDistance = haversineTest.between(geoTest3, geoTest4, radiusTest);
+
+        assertEquals(16795L, actualDistance);
+    }
+
     @DisplayName("chrisc23:Test Haversine calculator for all negative degrees")
     @Test
     public void testHaversineAllNegativedegree() {
