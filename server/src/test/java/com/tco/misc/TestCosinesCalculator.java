@@ -27,32 +27,56 @@ public class TestCosinesCalculator {
         }
     }
 
-    private static final double EARTH_RADIUS_KM = 6371.0;
-    private final CosinesCalculator cosinesTest = new CosinesCalculator();
+    private Geo geoTest1 = new Geo(0.0, 0.0);
+    private Geo geoTest2 = new Geo(0.0, 0.0);
+    private double radiusTest = 6371.0; 
+    private CosinesCalculator cosinesTest = new CosinesCalculator();
+    private final double DELTA = 10.0; 
 
     @DisplayName("reddy17: Test CosinesCalculator returns 0 for same location")
     @Test
     public void testBaseCosinesCalculatorReturnsZero() {
-        Geo sameLocation = new Geo(0.0, 0.0);
-        long actualDistance = cosinesTest.between(sameLocation, sameLocation, earthRadiusKm);
+        long actualDistance = cosinesTest.between(geoTest1, geoTest2, radiusTest);
         assertEquals(0L, actualDistance, "Distance should be 0 for the same location");
     }
-
-    @DisplayName("reddy17: Test CosinesCalculator for short distance in NYC")
+    
+    @DisplayName("reddy17: Test CosinesCalculator for partial negative degrees")
     @Test
-    public void testShortDistance() {
-        Geo point1 = new Geo(Math.toRadians(40.748817), Math.toRadians(-73.985428)); 
-        Geo point2 = new Geo(Math.toRadians(40.748541), Math.toRadians(-73.985758)); 
-        long actualDistance = cosinesTest.between(point1, point2, earthRadiusKm);
-        assertEquals(0L, actualDistance, "Distance should be less than 1 km for nearby locations");
+    public void testCosinesPartialNegativeDegree() {
+        Geo geoTest3 = new Geo(Math.toRadians(-30.0), Math.toRadians(-60.0)); 
+        Geo geoTest4 = new Geo(Math.toRadians(30.0), Math.toRadians(60.0)); 
+        long actualDistance = cosinesTest.between(geoTest3, geoTest4, radiusTest);
+
+        assertEquals(14309L, actualDistance, DELTA, "Distance for partial negative degrees should be approximately 14309 km");
+    }
+    
+    @DisplayName("reddy17: Test CosinesCalculator for all negative degrees")
+    @Test
+    public void testCosinesAllNegativeDegree() {
+        Geo geoTest3 = new Geo(Math.toRadians(-30.0), Math.toRadians(-60.0)); 
+        Geo geoTest4 = new Geo(Math.toRadians(-10.0), Math.toRadians(-90.0)); 
+        long actualDistance = cosinesTest.between(geoTest3, geoTest4, radiusTest);
+
+        assertEquals(3822L, actualDistance, DELTA, "Distance for all negative degrees should be approximately 3822 km");
     }
 
-    @DisplayName("reddy17: Test CosinesCalculator for long distance (NYC to LA)")
+    @DisplayName("reddy17: Test CosinesCalculator: Equatorial Distance (90 degrees)")
     @Test
-    public void testLongDistance() {
-        Geo newYork = new Geo(Math.toRadians(40.712776), Math.toRadians(-74.005974)); 
-        Geo losAngeles = new Geo(Math.toRadians(34.052235), Math.toRadians(-118.243683)); 
-        long actualDistance = cosinesTest.between(newYork, losAngeles, earthRadiusKm);
-        assertEquals(3940L, actualDistance, 50, "Distance between NYC and LA should be approximately 3940 km");
+    public void testEquatorial90Distance() {
+        Geo point1 = new Geo(0.0, 0.0);
+        Geo point2 = new Geo(0.0, Math.PI / 2); 
+        long actualDistance = cosinesTest.between(point1, point2, radiusTest);
+
+        assertEquals(10008L, actualDistance, DELTA, "Equatorial distance for 90 degrees should be approximately 10008 km");
+    }
+    
+    @DisplayName("reddy17: Test CosinesCalculator: Maximum Distance (180 degrees)")
+    @Test
+    public void testMax180Distance() {
+        Geo point1 = new Geo(0.0, 0.0);
+        Geo point2 = new Geo(0.0, Math.PI);
+        long actualDistance = cosinesTest.between(point1, point2, radiusTest);
+
+        assertEquals(20015L, actualDistance, DELTA, "Maximum distance for 180 degrees should be approximately 20015 km");
     }
 }
