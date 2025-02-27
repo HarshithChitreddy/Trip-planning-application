@@ -27,7 +27,7 @@ public class TestCosinesCalculator {
         }
     }
 
-    private static final double earthRadiusKm = 6371.0; 
+    private static final double earthRadiusKm = 6371.0;
     private final CosinesCalculator cosinesTest = new CosinesCalculator();
 
     @DisplayName("reddy17: Test CosinesCalculator returns 0 for same location")
