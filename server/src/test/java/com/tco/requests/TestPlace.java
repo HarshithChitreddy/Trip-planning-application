@@ -11,6 +11,7 @@ public class TestPlace {
 
     private Place placeUnderTest;
     private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude"; 
 
     @BeforeEach
     public void setUp() {
@@ -58,7 +59,7 @@ public class TestPlace {
     @Test
     @DisplayName("reddy17: lonRadians() for positive longitude")
     public void testLonRadiansPositive() {
-        placeUnderTest.put("longitude", "90.0");
+        placeUnderTest.put(LONGITUDE, "90.0");
         double expected = Math.toRadians(90.0);
         assertEquals(expected, placeUnderTest.lonRadians(), 0.0001);
     }
@@ -66,7 +67,7 @@ public class TestPlace {
     @Test
     @DisplayName("reddy17: lonRadians() for negative longitude")
     public void testLonRadiansNegative() {
-        placeUnderTest.put("longitude", "-90.0");
+        placeUnderTest.put(LONGITUDE, "-90.0");
         double expected = Math.toRadians(-90.0);
         assertEquals(expected, placeUnderTest.lonRadians(), 0.0001);
     }
@@ -74,7 +75,7 @@ public class TestPlace {
     @Test
     @DisplayName("reddy17: lonRadians() for zero longitude")
     public void testLonRadiansZero() {
-        placeUnderTest.put("longitude", "0.0");
+        placeUnderTest.put(LONGITUDE, "0.0");
         double expected = 0.0;
         assertEquals(expected, placeUnderTest.lonRadians(), 0.0001);
     }
@@ -82,15 +83,14 @@ public class TestPlace {
     @Test
     @DisplayName("reddy17: lonRadians() for invalid longitude")
     public void testInvalidLongitude() {
-        placeUnderTest.put("longitude", "invalid");
+        placeUnderTest.put(LONGITUDE, "invalid");
         assertThrows(NumberFormatException.class, () -> placeUnderTest.lonRadians());
     }
 
     @Test
     @DisplayName("reddy17: lonRadians() for null longitude")
     public void testNullLongitude() {
-        placeUnderTest.put("longitude", null);
+        placeUnderTest.put(LONGITUDE, null);
         assertThrows(NullPointerException.class, () -> placeUnderTest.lonRadians());
     }
-
 }
