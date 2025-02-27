@@ -26,7 +26,7 @@ public class DistancesRequest extends Request{
         //this.places = new Places();
         this.distances = new Distances();
 
-        if(!formula.equals("vincenty") || formula != null){
+        if(formula != null && !formula.equals("vincenty")){
             throw new BadRequestException();
         }
 
