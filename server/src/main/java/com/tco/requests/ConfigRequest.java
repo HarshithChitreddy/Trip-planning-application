@@ -28,6 +28,7 @@ public class ConfigRequest extends Request {
         features.add("distances");
         formulae.add("vincenty");
         formulae.add("haversine");
+        formulae.add("cosines");
         
         
         log.trace("buildResponse -> {}", this);
