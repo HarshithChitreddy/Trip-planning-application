@@ -20,21 +20,20 @@ public class DistancesRequest extends Request {
     protected double earthRadius;
     private Distances distances;
     private Places places;
-    private DistanceCalculator calculator;
     private static final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
     
     public void buildResponse() throws BadRequestException{
         this.distances = new Distances();
 
         if(!places.isEmpty()){
-            setCalculator();
+            DistanceCalculator calculator = setCalculator();
 
             if (places.size() > 2){
-                distanceCalc();
-                distanceCalcFirstLast();
+                distanceCalc(calculator);
+                distanceCalcFirstLast(calculator);
             } else if (places.size() == 2) {
-                distanceCalcFirstLast();
-                distanceCalcLastFirst();
+                distanceCalcFirstLast(calculator);
+                distanceCalcLastFirst(calculator);
             } else {
                 distances.add(0L);
             }    
@@ -43,31 +42,31 @@ public class DistancesRequest extends Request {
         log.trace("buildResponse -> {}", this);
     }
 
-    private void setCalculator() throws BadRequestException {
+    private DistanceCalculator setCalculator() throws BadRequestException {
         if (formula == null || formula.equals("vincenty")) {
-            calculator = new VincentyCalculator();
+            return new VincentyCalculator();
         } else if (formula.equals("haversine")) {
-            calculator = new HaversineCalculator();
-        } else if (formula.equals("cosine")) {
-            calculator = new CosinesCalculator();
+            return new HaversineCalculator();
+        } else if (formula.equals("cosines")) {
+            return new CosinesCalculator();
         } else {
             throw new BadRequestException();
         }
     }
     
-    private void distanceCalcFirstLast() {
+    private void distanceCalcFirstLast(DistanceCalculator calculator) {
         Place first = places.get(0);
         Place last = places.get(places.size()-1);
         distances.add(calculator.between(first, last, earthRadius));
     }
 
-    private void distanceCalcLastFirst(){
+    private void distanceCalcLastFirst(DistanceCalculator calculator){
         Place first = places.get(0);
         Place last = places.get(places.size()-1);
         distances.add(calculator.between(last, first, earthRadius));
     }
 
-    private void distanceCalc(){
+    private void distanceCalc(DistanceCalculator calculator){
         for(int i=0;i < places.size()-1; i++){
             Place from = places.get(i);
             Place to = places.get(i+1);
