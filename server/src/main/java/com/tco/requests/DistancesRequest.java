@@ -1,33 +1,25 @@
 package com.tco.requests;
-
-import java.util.List;
-import java.util.ArrayList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.tco.requests.Distances;
-import com.tco.requests.Places;
-
+import com.tco.misc.CalculatorFactory;
 import com.tco.misc.BadRequestException;
 import com.tco.misc.DistanceCalculator;
-import com.tco.misc.VincentyCalculator;
-import com.tco.misc.HaversineCalculator;
-import com.tco.misc.CosinesCalculator;
+
 
 public class DistancesRequest extends Request {
     protected String formula;
     protected double earthRadius;
     private Distances distances;
     private Places places;
+    private CalculatorFactory calculatorFactory = new CalculatorFactory();
     private static final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
     
     public void buildResponse() throws BadRequestException{
         this.distances = new Distances();
+        DistanceCalculator calculator = calculatorFactory.get(formula);
 
         if(!places.isEmpty()){
-            DistanceCalculator calculator = setCalculator();
-
+            
             if (places.size() > 2){
                 distanceCalc(calculator);
                 distanceCalcFirstLast(calculator);
@@ -42,17 +34,6 @@ public class DistancesRequest extends Request {
         log.trace("buildResponse -> {}", this);
     }
 
-    private DistanceCalculator setCalculator() throws BadRequestException {
-        if (formula == null || formula.equals("vincenty")) {
-            return new VincentyCalculator();
-        } else if (formula.equals("haversine")) {
-            return new HaversineCalculator();
-        } else if (formula.equals("cosines")) {
-            return new CosinesCalculator();
-        } else {
-            throw new BadRequestException();
-        }
-    }
     
     private void distanceCalcFirstLast(DistanceCalculator calculator) {
         Place first = places.get(0);

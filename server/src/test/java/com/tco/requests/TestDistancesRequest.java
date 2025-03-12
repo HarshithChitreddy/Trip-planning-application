@@ -8,11 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.List;
-import java.util.ArrayList;
 
 public class TestDistancesRequest {
     private Places testPlaces;
@@ -20,9 +15,6 @@ public class TestDistancesRequest {
     private Place place2 = new Place();
     private Place place3 = new Place();
     private DistancesRequest distReq;
-    private double earthRadius;
-    private String formula;
-    
     @BeforeEach
     public void setUpDR(){
         this.distReq = new DistancesRequest();
