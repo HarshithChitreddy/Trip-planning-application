@@ -1,7 +1,9 @@
 package com.tco.misc;
 
-import com.tco.misc.DistanceCalculator;
-
 public class CalculatorFactory {
+
+    public DistanceCalculator get(String formula) throws BadRequestException {
+        return new VincentyCalculator();
+    }
 
 }
