@@ -1,17 +1,7 @@
 package com.tco.misc;
 
+import com.tco.requests.Place;
 import com.tco.requests.Places;
-
-/* TEMPORARY COMMENT BLOCK - REMOVE BEFORE MERGE!
- * nearestNeighborWithOptimization(cities) {
- * for each starting city (as time permits) O(n)
- * add the starting city to the tour and remove from the list of unvisited cities
- * while there are unvisited cities remaining - O(n)
- * add the nearest unvisited city from the last city to the tour - O(n)
- * improve the tour with 2-opt or 3-opt (if time permits) - O(n?)
- * return the tour with the shortest distance
- * }
- */
 
 public class OneOptimizer extends TourOptimizer {
     
