@@ -142,5 +142,15 @@ public class TestVincentyCalculator {
         long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
         assertEquals(9554L, actualDistance);
     }
+    @DisplayName("HarshithChitreddy: Test Vincenty Calculator: Zero Radius")
+    @Test
+    public void testZeroRadius() {
+        radiusTest = 0.0;
+    
+        geoTest1 = new Geo(0.0, 0.0);
+        geoTest2 = new Geo(0.0, Math.PI / 2); // 90 degrees
 
+        long actualDistance = vincentyTest.between(geoTest1, geoTest2, radiusTest);
+        assertEquals(0L, actualDistance);
+    }
 }
