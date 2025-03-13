@@ -2,7 +2,6 @@ package com.tco.requests;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.tco.misc.BadRequestException;
 
 public class TourRequest extends Request{
@@ -13,8 +12,27 @@ public class TourRequest extends Request{
     private static final transient Logger log = LoggerFactory.getLogger(TourRequest.class);
 
     public void buildResponse() throws BadRequestException{
-        //TBD
+        this.places = buildPlacesList();
+        log.trace("buildResponse -> {}", this);
+
     }
+    private Places buildPlacesList() throws BadRequestException {
+        if (formula == null) {
+            this.formula = "vincenty";
+        }
+        if (!(formula.equalsIgnoreCase("haversine") ||
+              formula.equalsIgnoreCase("cosines") ||
+              formula.equalsIgnoreCase("vincenty"))) {
+            throw new BadRequestException();
+        }
+        if (places == null || places.isEmpty()) {
+            return places;
+        }
+        
+        return places;
+    }
+
+
 
     public void setPlaces(Places places){
         this.places = places;
