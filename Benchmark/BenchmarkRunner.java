@@ -1,5 +1,3 @@
-package performance;
-
 abstract class BenchmarkRunner {
 
 	public abstract String name();
