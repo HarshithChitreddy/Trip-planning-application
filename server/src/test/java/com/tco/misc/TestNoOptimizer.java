@@ -55,5 +55,16 @@ public class TestNoOptimizer {
         Places result = noOptimizer.construct(places, 10.0, "someFormula", 0.0);
         assertEquals(places, result);  
     }
+    @DisplayName("kjell: test case for Four place (test pattern set by chris23)")
+    @Test
+    public void testConstructReturnsOriginalPlacesForFourPlaces() {
+        places.add(createPlace("100.0", "-100.0"));  
+        places.add(createPlace("100.0", "100.0"));  
+        places.add(createPlace("-100.0", "100.0"));
+        places.add(createPlace("-100.0", "-100.0"));
+        NoOptimizer noOptimizer = new NoOptimizer();
+        Places result = noOptimizer.construct(places, 10.0, "someFormula", 0.0);
+        assertEquals(places, result);  
+    }
     
 }
