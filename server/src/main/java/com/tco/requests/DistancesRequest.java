@@ -11,11 +11,11 @@ public class DistancesRequest extends Request {
     protected double earthRadius;
     private Distances distances;
     private Places places;
-    private CalculatorFactory calculatorFactory = new CalculatorFactory();
     private static final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
     
     public void buildResponse() throws BadRequestException{
         this.distances = new Distances();
+        CalculatorFactory calculatorFactory = new CalculatorFactory();
         DistanceCalculator calculator = calculatorFactory.get(formula);
 
         if(!places.isEmpty()){
