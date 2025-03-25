@@ -14,8 +14,8 @@
 					"script": {
 						"id": "eaa81e94-0a35-40bb-b195-e71dd2eef9f2",
 						"exec": [
-							"pm.test(\"Response is HTTP404 status\", () => {",
-							"    pm.response.to.have.status(404);",
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
 							"});",
 							""
 						],
@@ -33,7 +33,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"requestType\": \"tour\"\n}",
+					"raw": "{\n    \"requestType\": \"tour\",\n \"earthRadius\": 6371,\n \"response\": 0.5,\n \"places\": [\n {\n \"name\": \"Sun Wukong\",\n \"municipality\":\n \"Waterfall Cave\",\n \"region\":\n \"Mountain of Flowers and Fruit\",\n \"country\":\n \"Aolai\",\n \"latitude\":\n \"45.0\",\n \"longitude\":\n \"90.0\"    },\n    {\n      \"name\": \"Subodhi\",\n \"municipality\":\n \"Cave of the Moon and Three Stars\",\n \"region\":\n \"Mountain of Mind and Heart\",\n \"country\":\n \"Continent to the West\",\n \"latitude\":\n \"-45.0\",\n \"longitude\":\n \"-90.0\"    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
