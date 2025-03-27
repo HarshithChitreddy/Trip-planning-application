@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "823e154d-9db8-44b1-a8ec-43725a3e9223",
+		"name": "Benchmarking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26277702-823e154d-9db8-44b1-a8ec-43725a3e9223"
+	},
+	"item": [
+		{
+			"name": "base: correct status Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc76716a-3b14-4291-9bb9-14d468991efc",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "21c66966-4020-4a88-a47d-e743a3491bb7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n \"earthRadius\": 6371,\n \"response\": 0.5,\n \"places\": [\n {\n \"name\": \"Sun Wukong\",\n \"municipality\":\n \"Waterfall Cave\",\n \"region\":\n \"Mountain of Flowers and Fruit\",\n \"country\":\n \"Aolai\",\n \"latitude\":\n \"45.0\",\n \"longitude\":\n \"90.0\"    },\n    {\n      \"name\": \"Subodhi\",\n \"municipality\":\n \"Cave of the Moon and Three Stars\",\n \"region\":\n \"Mountain of Mind and Heart\",\n \"country\":\n \"Continent to the West\",\n \"latitude\":\n \"-45.0\",\n \"longitude\":\n \"-90.0\"    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
