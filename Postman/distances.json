@@ -53,6 +53,52 @@
 			"response": []
 		},
 		{
+			"name": "reddy17: No places with cosine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c270104c-9c1c-4b7d-af87-e1ac0925eed8",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "cce05bf5-1fc9-464c-a175-847ea2dc81ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [],\n    \"earthRadius\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "dnweath: One Place Test",
 			"event": [
 				{
