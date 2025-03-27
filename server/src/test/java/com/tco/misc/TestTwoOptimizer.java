@@ -80,4 +80,11 @@ public class TestTwoOptimizer {
 
         assertEquals(originalTour, places, "Improve should not alter the tour if no swaps improve the route.");
     }
+    
+    @Test
+    @DisplayName("lennoxxx: Test construct() initialized tours correctly")
+    public void testConstructInititalizeTours(){
+        twoOptimizer.construct(places, 4720.0, "vincenty", 1.0);
+        assertEquals(3, places.size());
+    }
 }
