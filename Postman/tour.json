@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d6c782a2-95a8-4238-9c48-c1d5c725bf52",
+		"_postman_id": "c2ab3e8f-47ec-4a69-b613-4acdc6b38285",
 		"name": "tour",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "25883428-d6c782a2-95a8-4238-9c48-c1d5c725bf52"
+		"_uid": "42599998-c2ab3e8f-47ec-4a69-b613-4acdc6b38285"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eaa81e94-0a35-40bb-b195-e71dd2eef9f2",
+						"id": "0486d7bf-a55a-44aa-8f1a-643495d1a6bb",
 						"exec": [
 							"pm.test(\"Response is HTTP200 status\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -24,7 +24,7 @@
 					}
 				}
 			],
-			"id": "d18eb98b-593f-4ff8-8abe-122ddf8566a9",
+			"id": "50e856e5-1938-4f34-af75-2db83d487fb1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

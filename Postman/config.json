@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "05da2dee-6703-4612-ab32-f027b4df0cae",
+		"_postman_id": "caf65535-c8e7-40f7-95e9-c1594a4549ec",
 		"name": "config",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "25883428-05da2dee-6703-4612-ab32-f027b4df0cae"
+		"_uid": "42599998-caf65535-c8e7-40f7-95e9-c1594a4549ec"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "abad638e-4be4-4f41-b4d2-ccc97abf3a1d",
+						"id": "5a6f5335-10ec-4ada-b9ba-9a060875551f",
 						"exec": [
 							"pm.test(\"Response is HTTP200 status\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -22,7 +22,7 @@
 					}
 				}
 			],
-			"id": "3d1ff383-8370-497b-a915-eaba103c50e2",
+			"id": "e20b167f-40e5-4b80-b0fe-b8e1ee46caae",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
