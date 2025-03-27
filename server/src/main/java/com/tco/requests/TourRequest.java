@@ -1,58 +1,79 @@
 package com.tco.requests;
 
+import com.tco.misc.BadRequestException;
+import com.tco.misc.OptimizerFactory;
+import com.tco.misc.TourOptimizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.tco.misc.BadRequestException;
 
-public class TourRequest extends Request{
+public class TourRequest extends Request {
+    private static final transient Logger log = LoggerFactory.getLogger(TourRequest.class);
+
     private Places places;
     private double earthRadius;
     private double response;
     private String formula;
-    private static final transient Logger log = LoggerFactory.getLogger(TourRequest.class);
 
-    public void buildResponse() throws BadRequestException{
-        this.places = buildPlacesList();
-        log.trace("buildResponse -> {}", this);
-
+    public TourRequest() {
     }
-    private Places buildPlacesList() throws BadRequestException {
+
+    @Override
+    public void buildResponse() throws BadRequestException {
+        validateFormula();
+
+        if (places == null || places.isEmpty()) {
+            return;
+        }
+
+        int N = places.size();
+        OptimizerFactory factory = new OptimizerFactory();
+        TourOptimizer optimizer = factory.get(N, response);
+
+        this.places = optimizer.construct(places, earthRadius, formula, response);
+        log.trace("buildResponse -> {}", this);
+    }
+
+    private void validateFormula() throws BadRequestException {
         if (formula == null) {
             this.formula = "vincenty";
         }
+
         if (!(formula.equalsIgnoreCase("haversine") ||
               formula.equalsIgnoreCase("cosines") ||
               formula.equalsIgnoreCase("vincenty"))) {
-            throw new BadRequestException();
+            throw new BadRequestException(); 
         }
-        if (places == null || places.isEmpty()) {
-            return places;
-        }
-        
-        return places;
     }
 
-
-
-    public void setPlaces(Places places){
+    public void setPlaces(Places places) {
         this.places = places;
     }
-    public void setResponse(double response){
-        this.response = response;
-    }
-    public void setFormula(String formula){
-        this.formula = formula;
-    }
-    public void setEarthRadius(double earthRadius){
+
+    public void setEarthRadius(double earthRadius) {
         this.earthRadius = earthRadius;
     }
 
-    
-    public Places getPlaces(){ return places; }
+    public void setFormula(String formula) {
+        this.formula = formula;
+    }
 
-    public double getResponse(){ return response; }
+    public void setResponse(double response) {
+        this.response = response;
+    }
 
-    public double getEarthRadius(){ return earthRadius; }
+    public Places getPlaces() {
+        return places;
+    }
 
-    public String getFormula(){ return formula; }
+    public double getEarthRadius() {
+        return earthRadius;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public double getResponse() {
+        return response;
+    }
 }
