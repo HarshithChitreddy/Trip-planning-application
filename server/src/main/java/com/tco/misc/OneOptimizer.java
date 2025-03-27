@@ -5,14 +5,14 @@ import com.tco.requests.Places;
 
 public class OneOptimizer extends TourOptimizer {
     
-    private Places currentTour;
+    /*private Places currentTour;
     private double earthRadius;
     private long startTime;
     private double responseTime;
     private DistanceCalculator calculator;
     
 
-    @Override
+    
     public Places construct(Places places, Double radius, String formula, Double response) {
         if (places == null || places.size() < 3) {
             return places;
@@ -26,7 +26,7 @@ public class OneOptimizer extends TourOptimizer {
 
         return currentTour;
     }
-
+/* */
     @Override
     public void improve() {
 
