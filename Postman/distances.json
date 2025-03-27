@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1612a10e-4664-4a39-85ea-70accb33ebac",
+		"_postman_id": "cca0a8c2-10cb-481b-a2e2-00f87ab9ad84",
 		"name": "distances",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "25883428-1612a10e-4664-4a39-85ea-70accb33ebac"
+		"_uid": "42599998-cca0a8c2-10cb-481b-a2e2-00f87ab9ad84"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7e07c068-d0a3-4a72-b3b8-0aaf43db34be",
+						"id": "c270104c-9c1c-4b7d-af87-e1ac0925eed8",
 						"exec": [
 							"pm.test(\"Response is HTTP200 status\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -23,7 +23,7 @@
 					}
 				}
 			],
-			"id": "2ab1f3b5-affe-435e-8fb9-da209c70b005",
+			"id": "841ab3de-0d15-4aae-b767-4db81ced7d14",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -33,6 +33,54 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [],\n    \"earthRadius\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dnweath: One Place Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c68594c9-d886-47c8-980d-326989e772fa",
+						"exec": [
+							"pm.test(\"dnweath: One location successfully returns a single value of 0 for distances array.\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([0]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a9c5b09f-9a15-4406-a14a-dcd4dbca6b14",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
