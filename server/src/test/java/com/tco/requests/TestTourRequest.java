@@ -153,4 +153,78 @@ public class TestTourRequest {
         assertDoesNotThrow(() -> tourRequest.buildResponse());
         assertEquals(0, tourRequest.getPlaces().size());
     }
+    @Test
+    @DisplayName("reddy17: Null places should not throw in buildResponse")
+    public void testNullPlacesNoThrow() {
+        tourRequest.setPlaces(null);
+        tourRequest.setFormula("vincenty");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        assertDoesNotThrow(() -> tourRequest.buildResponse());
+        assertNull(tourRequest.getPlaces());
+    }
+    
+    @Test
+    @DisplayName("reddy17: Response 0 should still allow buildResponse (NoOptimizer fallback)")
+    public void testBuildResponseWithZeroResponse() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("vincenty");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(0.0); 
+    
+        tourRequest.buildResponse();
+        assertEquals(2, tourRequest.getPlaces().size());
+    }
+    
+    @Test
+    @DisplayName("reddy17: buildResponse should handle large number of places")
+    public void testBuildResponseLargeInput() throws BadRequestException {
+        for (int i = 0; i < 260; i++) {
+            Place p = new Place();
+            p.put("latitude", String.valueOf(i % 90));
+            p.put("longitude", String.valueOf(i % 180));
+            testPlaces.add(p);
+        }
+    
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("cosines");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertEquals(260, tourRequest.getPlaces().size());
+    }
+    
+    @Test
+    @DisplayName("reddy17: buildResponse called twice should not throw")
+    public void testBuildResponseCalledTwice() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("vincenty");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertDoesNotThrow(() -> tourRequest.buildResponse());
+        assertEquals(2, tourRequest.getPlaces().size());
+    }
+    
+    @Test
+    @DisplayName("reddy17: Formula set after setting other fields still applies correctly")
+    public void testLateFormulaSetStillApplies() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+        tourRequest.setFormula("haversine"); 
+    
+        tourRequest.buildResponse();
+        assertEquals("haversine", tourRequest.getFormula());
+    }
+    
 }

@@ -41,7 +41,7 @@ public class TourRequest extends Request {
         if (!(formula.equalsIgnoreCase("haversine") ||
               formula.equalsIgnoreCase("cosines") ||
               formula.equalsIgnoreCase("vincenty"))) {
-            throw new BadRequestException("Invalid formula: " + formula);
+            throw new BadRequestException(); 
         }
     }
 
