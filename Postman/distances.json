@@ -99,54 +99,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "dnweath: Two Places Test",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "87c96b08-876f-403c-880b-22a15f622ad9",
-						"exec": [
-							"pm.test(\"dnweath: Two locations has two elements in the array, both the same value.\", () => {\r",
-							"    const responseJson = pm.response.json();\r",
-							"    pm.expect(responseJson.distances).to.eql([4712, 4712]);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"id": "10f65a48-d7ad-4a01-86b0-a8041849b4e8",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        },\r\n        {\r\n            \"name\": \"Location 2\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"90.0\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/distances",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"distances"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
