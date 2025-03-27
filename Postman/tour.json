@@ -52,6 +52,100 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "dnweath: Invalid formula sends back 400 code test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a847ae74-db70-445e-b0d6-8b5e05f76e86",
+						"exec": [
+							"pm.test(\"dnweath: Response status is 400.\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "10ddbd94-843b-4381-be41-c921e017e6c5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"formula\": \"sigmoid\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.034500\",\r\n            \"longitude\": \"-85.030339\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dnweath: One place returns same place back",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "285d429c-5526-4432-a6ee-aae66c25b79a",
+						"exec": [
+							"pm.test(\"dnweath: One place returns the same place back\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.places[0].name).to.contain(\"Wild Leap Brew Co.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "69e8195a-bad5-46db-9567-2e7c801f6eff",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.034500\",\r\n            \"longitude\": \"-85.030339\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
