@@ -200,6 +200,54 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "reddy17: Three Places Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b0993a8-a452-4732-bac4-6006d2067926",
+						"exec": [
+							"pm.test(\"reddy17: Two locations successfully returns.\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([52,107,69]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "66df7186-16f2-4982-a078-7ce5275c6501",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"40.58\",\r\n            \"longitude\": \"-105.09\"\r\n        },\r\n                {\r\n            \"name\": \"Location 2\",            \r\n            \"latitude\": \"39.94\",\r\n            \"longitude\": \"-104.08\"\r\n        },\r\n                {\r\n            \"name\": \"Location 3\",\r\n            \"latitude\": \"40.15\",\r\n            \"longitude\": \"-106.73\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
