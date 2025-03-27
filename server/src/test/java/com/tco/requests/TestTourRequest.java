@@ -71,4 +71,86 @@ public class TestTourRequest {
         tourRequest.setPlaces(testPlaces);
         assertEquals(testPlaces, tourRequest.getPlaces());
     }
+
+    @Test
+    @DisplayName("reddy17: Test buildResponse() with haversine formula")
+    public void testBuildResponseHaversine() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        testPlaces.add(place3);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("haversine");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertNotNull(tourRequest.getPlaces());
+        assertEquals(3, tourRequest.getPlaces().size());
+    }
+
+    @Test
+    @DisplayName("reddy17: Test buildResponse() with null formula defaults to vincenty")
+    public void testBuildResponseWithNullFormula() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula(null);
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertEquals("vincenty", tourRequest.getFormula());
+    }
+        
+    @Test
+    @DisplayName("reddy17: buildResponse with cosines formula works")
+    public void testBuildResponseCosines() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        testPlaces.add(place3);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("cosines");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertEquals(3, tourRequest.getPlaces().size());
+    }
+
+    @Test
+    @DisplayName("reddy17: Invalid formula should throw BadRequestException")
+    public void testInvalidFormulaThrows() {
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("euclidean");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        assertThrows(BadRequestException.class, () -> tourRequest.buildResponse());
+    }
+
+    @Test
+    @DisplayName("reddy17: Test buildResponse() with mixed-case formula")
+    public void testFormulaCaseInsensitive() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("HaVerSiNe");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertEquals("HaVerSiNe", tourRequest.getFormula()); 
+    }
+
+    @Test
+    @DisplayName("reddy17: Empty places list should not throw error")
+    public void testEmptyPlacesNoThrow() {
+        tourRequest.setPlaces(new Places());
+        tourRequest.setFormula("vincenty");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        assertDoesNotThrow(() -> tourRequest.buildResponse());
+        assertEquals(0, tourRequest.getPlaces().size());
+    }
 }
