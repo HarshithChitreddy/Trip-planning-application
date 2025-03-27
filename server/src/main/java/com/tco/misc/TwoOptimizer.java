@@ -34,12 +34,12 @@ public class TwoOptimizer extends TourOptimizer {
         boolean improved;
         do {
             improved = false;
-            for (int i = 0; i < currentTour.size() - 1; i++) {
+            for (int i = 0; i <= currentTour.size() - 3; i++) {
                 if (System.currentTimeMillis() - startTime > responseTime) {
                     return;
                 }
 
-                for (int j = i + 2; j < currentTour.size(); j++) {
+                for (int j = i + 2; j <= currentTour.size() - 1; j++) {
                     if (shouldSwap(i, j)) {
                         performSwap(i, j);
                         improved = true;
