@@ -4,14 +4,11 @@ public class OptimizerFactory {
 
     public TourOptimizer get(int N, Double response){
 
-        if(response == 0.0){
+        if(response < 0.2){
             return new NoOptimizer();
         }
-        else if(N > 250 && N < 600){
+        else if(response > 0.6){
             return new OneOptimizer();
-        }
-        else if(N <= 250){
-            return new TwoOptimizer();
         }
         else{ return new NoOptimizer(); }
     }

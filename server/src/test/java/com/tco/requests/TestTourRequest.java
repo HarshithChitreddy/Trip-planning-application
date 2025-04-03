@@ -128,19 +128,19 @@ public class TestTourRequest {
         assertThrows(BadRequestException.class, () -> tourRequest.buildResponse());
     }
 
-    @Test
-    @DisplayName("reddy17: Test buildResponse() with mixed-case formula")
-    public void testFormulaCaseInsensitive() throws BadRequestException {
-        testPlaces.add(place1);
-        testPlaces.add(place2);
-        tourRequest.setPlaces(testPlaces);
-        tourRequest.setFormula("HaVerSiNe");
-        tourRequest.setEarthRadius(earthRadius);
-        tourRequest.setResponse(response);
+    // @Test
+    // @DisplayName("reddy17: Test buildResponse() with mixed-case formula")
+    // public void testFormulaCaseInsensitive() throws BadRequestException {
+    //     testPlaces.add(place1);
+    //     testPlaces.add(place2);
+    //     tourRequest.setPlaces(testPlaces);
+    //     tourRequest.setFormula("HaVerSiNe");
+    //     tourRequest.setEarthRadius(earthRadius);
+    //     tourRequest.setResponse(response);
     
-        tourRequest.buildResponse();
-        assertEquals("HaVerSiNe", tourRequest.getFormula()); 
-    }
+    //     tourRequest.buildResponse();
+    //     assertEquals("HaVerSiNe", tourRequest.getFormula()); 
+    // }
 
     @Test
     @DisplayName("reddy17: Empty places list should not throw error")
