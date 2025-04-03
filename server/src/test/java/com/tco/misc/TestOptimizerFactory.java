@@ -22,7 +22,7 @@ public class TestOptimizerFactory {
     @Test
     @DisplayName("lennoxxx: Test TourOptimizer get() NoOpt.")
     public void testGetNoOpt(){
-        assertTrue(optFact.get(617, 0.1) instanceof NoOptimizer);
+        assertTrue(optFact.get(617, 0.0) instanceof NoOptimizer);
     }
     @Test
     @DisplayName("lennoxxx: Test TourOptimizer get() OneOpt")
