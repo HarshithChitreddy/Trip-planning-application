@@ -107,7 +107,6 @@ public class TestTourOptimizer {
                                    + calculator.between(optPlaces.get(2), optPlaces.get(3), radius)
                                    + calculator.between(optPlaces.get(3), optPlaces.get(0), radius);
 
-        System.out.println(calculatedDistances);
 
         assertTrue(calculatedDistances == 942l);
 
