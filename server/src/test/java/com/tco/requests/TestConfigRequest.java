@@ -31,9 +31,21 @@ public class TestConfigRequest {
     }
 
     @Test
+    @DisplayName("dnweath: Features includes \"distances\"")
+    public void testDistancesFeature() {
+        assertTrue(conf.validFeature("distances"));
+    }
+
+    @Test
+    @DisplayName("dnweath: Features includes \"tour\"")
+    public void testTourFeature() {
+        assertTrue(conf.validFeature("tour"));
+    }
+
+    @Test
     @DisplayName("base: Features list is expected length")
     public void testFeaturesLength(){
-        assertEquals(conf.getFeatures().size(), 2);
+        assertEquals(conf.getFeatures().size(), 3);
     }
 
     /*
