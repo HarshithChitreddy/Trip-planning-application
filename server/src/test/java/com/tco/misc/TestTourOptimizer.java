@@ -14,6 +14,7 @@ public class TestTourOptimizer {
     private String formula;
     private Double response;
     private TourOptimizer testTour;
+    private DistanceCalculator calculator;
  
     @BeforeEach
     public void setUp() {
@@ -21,8 +22,19 @@ public class TestTourOptimizer {
         this.radius = 300.0;
         this.formula = "vincenty";
         this.response = 1.0;
+        testTour = new OneOptimizer();
+        calculator = new VincentyCalculator();
         
     }
+
+    @Test
+    @DisplayName("dnweath: Test Nearest Neighbor with empty list")
+        public void testNearestNeighborWithNoPlaces() throws BadRequestException {
+            testTour.construct(places, radius, formula, response);
+            Places optPlaces = testTour.getPlaces();
+
+            assertTrue(optPlaces.size() == 0);
+        }
 
     
     @Test
@@ -60,6 +72,46 @@ public class TestTourOptimizer {
         assertTrue(calculator.between(optPlaces.get(2), optPlaces.get(0), radius) == calculator.between(place1, place2, radius));
  
     }
-    
+
+    /*
+     * Should reorder the places so that you only travel from 0.0, 90.0 -> 0.0, 0.0 twice
+     */
+    @Test
+    @DisplayName("dnweath:test Nearest Neighbor with 4 places") 
+    public void testNearestNeighborWithFourPlaces() throws BadRequestException{
+        Place place1 = new Place();
+        Place place2 = new Place();
+        Place place3 = new Place();
+        Place place4 = new Place();
+
+        place1.put("latitude", "0.0");
+        place1.put("longitude", "90.0");
+        place2.put("latitude", "0.0");
+        place2.put("longitude", "0.0");
+        place3.put("latitude", "0.0");
+        place3.put("longitude", "90.0");
+        place4.put("latitude", "0.0");
+        place4.put("longitude", "0.0");
+
+        places.add(place1);
+        places.add(place2);
+        places.add(place3);
+        places.add(place4);
+
+        testTour.construct(places, radius, formula, response);
+        Places optPlaces = testTour.getPlaces();
+
+
+        long calculatedDistances = calculator.between(optPlaces.get(0), optPlaces.get(1), radius)
+                                   + calculator.between(optPlaces.get(1), optPlaces.get(2), radius)
+                                   + calculator.between(optPlaces.get(2), optPlaces.get(3), radius)
+                                   + calculator.between(optPlaces.get(3), optPlaces.get(0), radius);
+
+
+        assertTrue(calculatedDistances == 942l);
+
+    }
 }
+    
+
 
