@@ -34,8 +34,18 @@ public class NearRequest extends Request{
     public void setLimit(int limit){
         this.limit = limit;
     }
+    
+    public int getDistance(){ return distance; }
+
+    public String getFormula(){ return formula; }
+
+    public double getEarthRadius(){ return earthRadius; }
+
+    public int getLimit(){ return limit; }
+
 
     
+
 
     
 }
