@@ -142,7 +142,6 @@ public class TestTwoOptimizer {
         }
         return total;
     }
-    
 
     @Test
     @DisplayName("reddy17: Optimize should not change already optimal tour")
