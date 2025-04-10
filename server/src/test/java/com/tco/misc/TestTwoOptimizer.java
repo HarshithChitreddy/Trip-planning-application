@@ -114,4 +114,76 @@ public class TestTwoOptimizer {
         TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, mockCalculator);
         assertDoesNotThrow(optimizer::improve);
     }
+
+    @Test
+    @DisplayName("reddy17: Optimize should reduce total distance if not optimal")
+    public void testTourDistanceReduces() {
+        Places reversed = new Places();
+        reversed.add(createPlace("1", "1"));
+        reversed.add(createPlace("0", "1"));
+        reversed.add(createPlace("0", "0"));
+        reversed.add(createPlace("1", "0")); 
+    
+        TwoOptimizer optimizer = new TwoOptimizer(reversed, 6371.0, 1.0, mockCalculator);
+    
+        long before = getTotalDistance(optimizer.getOptimizedTour(), mockCalculator);
+        optimizer.improve();
+        long after = getTotalDistance(optimizer.getOptimizedTour(), mockCalculator);
+    
+        assertTrue(after <= before, "Total tour distance should reduce after optimization");
+    }
+    
+    private long getTotalDistance(Places places, DistanceCalculator calculator) {
+        long total = 0;
+        for (int i = 0; i < places.size(); i++) {
+            Place from = places.get(i);
+            Place to = places.get((i + 1) % places.size());
+            total += calculator.between(from, to, 6371.0);
+        }
+        return total;
+    }
+    
+
+    @Test
+    @DisplayName("reddy17: Optimize should not change already optimal tour")
+    public void testTourOrderUnchangedWhenOptimal() {
+        Places square = new Places();
+        square.add(createPlace("0", "0"));
+        square.add(createPlace("0", "1"));
+        square.add(createPlace("1", "1"));
+        square.add(createPlace("1", "0"));
+    
+        TwoOptimizer optimizer = new TwoOptimizer(square, 6371.0, 1.0, mockCalculator);
+    
+        Places before = new Places();
+        before.addAll(optimizer.getOptimizedTour());
+    
+        optimizer.improve();
+        Places after = optimizer.getOptimizedTour();
+    
+        assertEquals(before.toString(), after.toString(), "Tour should remain unchanged when already optimal");
+    }
+    @Test
+    @DisplayName("reddy17: Optimize should handle many places without crashing")
+    public void testWithManyPlaces() {
+        Places many = new Places();
+        for (int i = 0; i < 50; i++) {
+            many.add(createPlace(String.valueOf(i), String.valueOf(i)));
+        }
+    
+        TwoOptimizer optimizer = new TwoOptimizer(many, 6371.0, 2.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve, "Should handle many places without throwing errors");
+    }
+    @Test
+    @DisplayName("reddy17: Optimize handles identical locations gracefully")
+    public void testWithIdenticalLocations() {
+        Places identical = new Places();
+        for (int i = 0; i < 5; i++) {
+            identical.add(createPlace("10", "10"));
+        }
+    
+        TwoOptimizer optimizer = new TwoOptimizer(identical, 6371.0, 1.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve);
+        assertEquals(5, optimizer.getOptimizedTour().size());
+    }            
 }
