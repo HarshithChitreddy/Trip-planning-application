@@ -291,7 +291,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "kjell: test Postman tour request case",
 			"id": "5b5926af-e7be-4617-9655-161440be590c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
