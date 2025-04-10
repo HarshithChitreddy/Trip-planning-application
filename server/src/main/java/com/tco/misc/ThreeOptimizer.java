@@ -25,11 +25,63 @@ public class ThreeOptimizer extends TourOptimizer {
 
     @Override
     public void improve() {
-        // To be implemented in next pr
-        System.out.println("ThreeOptimizer improve() method defined.");
+        if (currentTour == null || currentTour.size() < 3 || calculator == null) {
+            return;
+        }
+
+        boolean improved;
+
+        do {
+            improved = false;
+
+            for (int i = 0; i < currentTour.size() - 2; i++) {
+                for (int j = i + 1; j < currentTour.size() - 1; j++) {
+                    for (int k = j + 1; k < currentTour.size(); k++) {
+
+                        if (System.currentTimeMillis() - startTime > responseTime) {
+                            return;
+                        }
+
+                        long original = segmentDistance(i, j, k);
+                        reverseSegment(i + 1, k);
+                        long improvedDist = segmentDistance(i, j, k);
+
+                        if (improvedDist < original) {
+                            improved = true;
+                        } else {
+                            reverseSegment(i + 1, k);
+                        }
+                    }
+                }
+            }
+        } while (improved);
+    }
+
+    private long segmentDistance(int i, int j, int k) {
+        Place A = currentTour.get(i);
+        Place B = currentTour.get(j);
+        Place C = currentTour.get(k);
+        Place next = currentTour.get((k + 1) % currentTour.size());
+
+        return calculator.between(A, B, earthRadius) +
+               calculator.between(B, C, earthRadius) +
+               calculator.between(C, next, earthRadius);
+    }
+
+    private void reverseSegment(int start, int end) {
+        while (start < end) {
+            Place temp = currentTour.get(start);
+            currentTour.set(start, currentTour.get(end));
+            currentTour.set(end, temp);
+            start++;
+            end--;
+        }
     }
 
     public Places getOptimizedTour() {
         return currentTour;
+    }
+    public DistanceCalculator getCalculator() {
+        return calculator;
     }
 }
