@@ -43,15 +43,9 @@ public class TestConfigRequest {
     }
 
     @Test
-    @DisplayName("lennoxxx: Features includes \"near\"")
-    public void testNearFeature() {
-        assertTrue(conf.validFeature("near"));
-    }
-
-    @Test
     @DisplayName("base: Features list is expected length")
     public void testFeaturesLength(){
-        assertEquals(conf.getFeatures().size(), 4);
+        assertEquals(conf.getFeatures().size(), 3);
     }
 
     /*
