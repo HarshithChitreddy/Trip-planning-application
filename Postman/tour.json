@@ -289,6 +289,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "5b5926af-e7be-4617-9655-161440be590c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371,\r\n    \"response\": 0.5,\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Sun Wukong\",\r\n            \"municipality\": \"Waterfall Cave\",\r\n            \"region\": \"Mountain of Flowers and Fruit\",\r\n            \"country\": \"Aolai\",\r\n            \"latitude\": \"45.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Subodhi\",\r\n            \"municipality\": \"Cave of the Moon and Three Stars\",\r\n            \"region\": \"Mountain of Mind and Heart\",\r\n            \"country\": \"Continent to the West\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-90.0\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
