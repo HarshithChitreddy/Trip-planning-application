@@ -21,12 +21,12 @@ public class TestOptimizerFactory {
 
     @Test
     @DisplayName("lennoxxx: Test TourOptimizer get() NoOpt.")
-    public void testGetNoOpt(){
+    public void testGetNoOpt() throws BadRequestException{
         assertTrue(optFact.get(617, 0.0) instanceof NoOptimizer);
     }
     @Test
     @DisplayName("lennoxxx: Test TourOptimizer get() OneOpt")
-    public void testGetOneOpt(){
+    public void testGetOneOpt() throws BadRequestException{
         assertTrue(optFact.get(300, 0.8) instanceof OneOptimizer);
     }
     // @Test
@@ -36,8 +36,16 @@ public class TestOptimizerFactory {
     // }
     @Test
     @DisplayName("lennoxxx: Test TourOptimizer zero response time.")
-    public void testGetWithZeroReponseTime(){
+    public void testGetWithZeroReponseTime() throws BadRequestException{
         assertTrue(optFact.get(260, 0.0) instanceof NoOptimizer);
+    }
+
+    @Test
+    @DisplayName("lennoxxx: Test TourOptimizer for invalid response time.")
+    public void testInvalidResponseTime() throws BadRequestException{
+        assertThrows(BadRequestException.class, () -> {
+            optFact.get(265, 1.1);
+        });
     }
 
 }
