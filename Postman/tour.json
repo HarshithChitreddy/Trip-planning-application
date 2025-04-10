@@ -242,6 +242,53 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "dnweath: Empty places returns empty place array",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5c070cb-8bdf-4323-8746-f267bb232280",
+						"exec": [
+							"pm.test(\"dnweath: Empty places return empty array.\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.places).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "67039bbf-f0b0-45d1-852b-762499e10868",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
