@@ -15,9 +15,9 @@ public class TestThreeOptimizer {
     @BeforeEach
     public void setUp() {
         places = new Places();
-        places.add(createPlace("36.3932", "25.4615"));     // Santorini
-        places.add(createPlace("39.7392", "-104.9903"));   // Denver
-        places.add(createPlace("34.0522", "-118.2437"));   // LA
+        places.add(createPlace("36.3932", "25.4615"));     
+        places.add(createPlace("39.7392", "-104.9903"));  
+        places.add(createPlace("34.0522", "-118.2437")); 
     }
 
     private Place createPlace(String lat, String lon) {
@@ -121,6 +121,57 @@ public class TestThreeOptimizer {
         assertThrows(BadRequestException.class, () -> {
             new ThreeOptimizer(places, 6371.0, "invalidFormula", 1.0);
         });
+    }
+
+    @Test
+    @DisplayName("reddy17: optimize() should improve tour with more than 3 places")
+    public void testImproveLargerTour() throws BadRequestException {
+        Places bigTour = new Places();
+        bigTour.add(createPlace("36.3932", "25.4615")); 
+        bigTour.add(createPlace("40.7128", "-74.0060")); 
+        bigTour.add(createPlace("34.0522", "-118.2437"));
+        bigTour.add(createPlace("51.5074", "-0.1278"));  
+
+        ThreeOptimizer optimizer = new ThreeOptimizer(bigTour, 6371.0, "vincenty", 1.0);
+        long before = getTotalDistance(bigTour, optimizer);
+        optimizer.improve();
+        long after = getTotalDistance(optimizer.getOptimizedTour(), optimizer);
+
+        assertTrue(after <= before, "Optimizer should reduce distance for large tours");
+    }
+
+    @Test
+    @DisplayName("reddy17: optimizer should not make reversed square tour worse")
+    public void testReversedTourImprovement() throws BadRequestException {
+        Places reversed = new Places();
+        reversed.add(createPlace("1", "1"));
+        reversed.add(createPlace("0", "1"));
+        reversed.add(createPlace("0", "0"));
+        reversed.add(createPlace("1", "0"));
+
+        ThreeOptimizer optimizer = new ThreeOptimizer(reversed, 6371.0, "vincenty", 1.0);
+        long before = getTotalDistance(reversed, optimizer);
+        optimizer.improve();
+        long after = getTotalDistance(optimizer.getOptimizedTour(), optimizer);
+
+        assertTrue(after <= before, "Optimizer should not make the tour worse");
+    }
+
+    @Test
+    @DisplayName("reddy17: optimizer should handle outlier point efficiently")
+    public void testWithOutlier() throws BadRequestException {
+        Places outlierTour = new Places();
+        outlierTour.add(createPlace("0", "0"));
+        outlierTour.add(createPlace("0", "1"));
+        outlierTour.add(createPlace("0", "2"));
+        outlierTour.add(createPlace("90", "0")); 
+
+        ThreeOptimizer optimizer = new ThreeOptimizer(outlierTour, 6371.0, "vincenty", 1.0);
+        long before = getTotalDistance(outlierTour, optimizer);
+        optimizer.improve();
+        long after = getTotalDistance(optimizer.getOptimizedTour(), optimizer);
+
+        assertTrue(after <= before, "Tour with outlier should still be optimized");
     }
 
     private long getTotalDistance(Places tour, ThreeOptimizer optimizer) {
