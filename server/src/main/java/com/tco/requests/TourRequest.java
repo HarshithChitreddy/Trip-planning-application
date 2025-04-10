@@ -30,6 +30,7 @@ public class TourRequest extends Request {
         TourOptimizer optimizer = factory.get(N, response);
 
         this.places = optimizer.construct(places, earthRadius, formula, response);
+        optimizer.improve();
         log.trace("buildResponse -> {}", this);
     }
 
