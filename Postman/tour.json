@@ -320,6 +320,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "lennoxxx: Invalid response returns 400 error code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "094391cd-3d44-43d5-bc40-d56fa9fd72e4",
+						"exec": [
+							"pm.test(\"lennoxxx: Testing for invalid response. Status code should be 400\", () => {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fbe0e0c8-f67f-4219-ae12-11d959f4bfe0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 3062,\r\n    \"response\": 1.1,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"The Black Forge Inn\",\r\n            \"municipality\": \"Walkinstown\",\r\n            \"region\": \"Dublin\",\r\n            \"country\": \"Ireland\",\r\n            \"latitude\": \"53.3241666667\",\r\n            \"longitude\": \"-6.3263888889\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
