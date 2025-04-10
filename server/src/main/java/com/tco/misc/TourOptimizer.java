@@ -8,7 +8,7 @@ public abstract class TourOptimizer {
     CalculatorFactory calculatorFactory = new CalculatorFactory();
     DistanceCalculator calculator;
     Places placesFinal;
-   
+   int[] indexBestPlaces;
    
    
     public Places construct(Places places, Double radius, String formula, Double response) throws BadRequestException{
@@ -41,6 +41,7 @@ public abstract class TourOptimizer {
  
 private Places convertToPlaces(int[] bestTour,Places places){
     Places tour = new Places();
+    this.indexBestPlaces = bestTour;
     for(int i = 0; i < places.size();i++){
        
         tour.add(places.get(bestTour[i]));
@@ -121,6 +122,10 @@ private long sumOfDistance(int[] currentTour, Places places, Double radius){
  
     public Places getPlaces() {
         return placesFinal;
+    }
+    public int[] getIndexBestTour(){
+        return indexBestPlaces;
+    
     }
    
 }

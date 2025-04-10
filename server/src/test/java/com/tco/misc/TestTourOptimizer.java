@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 import com.tco.requests.*;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
  
 public class TestTourOptimizer {
@@ -35,6 +35,36 @@ public class TestTourOptimizer {
 
             assertTrue(optPlaces.size() == 0);
         }
+         @Test
+    @DisplayName("chrisc23:test index of the best tour with four places") 
+    public void testIndexWithFourPlaces() throws BadRequestException{
+        Place place1 = new Place();
+        Place place2 = new Place();
+        Place place3 = new Place();
+        Place place4 = new Place();
+
+        place1.put("latitude", "0.0"); 
+        place1.put("longitude", "90.0");
+        place2.put("latitude", "0.0"); 
+        place2.put("longitude", "0.0");
+        place3.put("latitude", "0.0"); 
+        place3.put("longitude", "90.0");  
+        place4.put("latitude", "0.0");
+        place4.put("longitude", "0.0"); 
+
+        places.add(place1);
+        places.add(place2);
+        places.add(place3);
+        places.add(place4);
+
+        testTour.construct(places, radius, formula, response);
+
+        int[] bestIndexTour = testTour.getIndexBestTour();
+        int[] result = {1,3,0,2};
+
+        assertArrayEquals(bestIndexTour,result);
+
+    }
 
     
     @Test
@@ -109,6 +139,45 @@ public class TestTourOptimizer {
 
 
         assertTrue(calculatedDistances == 942l);
+
+    }
+    @Test
+    @DisplayName("chrisc23:test Nearest Neighbor with 5 places") 
+    public void testNearestNeighborWithFivePlaces() throws BadRequestException{
+        Place place1 = new Place();
+        Place place2 = new Place();
+        Place place3 = new Place();
+        Place place4 = new Place();
+        Place place5 = new Place();
+
+        place1.put("latitude", "0.0");
+        place1.put("longitude", "90.0");
+        place2.put("latitude", "0.0");
+        place2.put("longitude", "0.0");
+        place3.put("latitude", "0.0");
+        place3.put("longitude", "90.0");
+        place4.put("latitude", "0.0");
+        place4.put("longitude", "0.0");
+        place5.put("latitude", "0.0");
+        place5.put("longitude", "45.0");
+
+        places.add(place1);
+        places.add(place2);
+        places.add(place3);
+        places.add(place4);
+        places.add(place5);
+
+        testTour.construct(places, radius, formula, response);
+        Places optPlaces = testTour.getPlaces();
+
+
+        long calculatedDistances = calculator.between(optPlaces.get(0), optPlaces.get(1), radius)
+                                   + calculator.between(optPlaces.get(1), optPlaces.get(2), radius)
+                                   + calculator.between(optPlaces.get(2), optPlaces.get(3), radius)
+                                   + calculator.between(optPlaces.get(3), optPlaces.get(4), radius)
+                                   + calculator.between(optPlaces.get(4), optPlaces.get(0), radius);
+
+        assertTrue(calculatedDistances == 943l);
 
     }
 }
