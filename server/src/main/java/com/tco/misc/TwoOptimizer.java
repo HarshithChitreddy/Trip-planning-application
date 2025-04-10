@@ -10,19 +10,18 @@ public class TwoOptimizer extends TourOptimizer {
     private double responseTime;
     private DistanceCalculator calculator;
 
-    @Override
-    public Places construct(Places places, Double radius, String formula, Double response) {
+    public TwoOptimizer(Places places, double radius, double responseSeconds, DistanceCalculator calculator) {
         if (places == null || places.size() < 3) {
-            return places;
+            this.currentTour = places;
+        } else {
+            this.currentTour = new Places();
+            this.currentTour.addAll(places);
         }
-        
-        this.currentTour = new Places();
-        this.currentTour.addAll(places);
+
         this.earthRadius = radius;
-        this.responseTime = response * 1000; 
+        this.responseTime = responseSeconds * 1000; 
+        this.calculator = calculator;
         this.startTime = System.currentTimeMillis();
-        
-        return currentTour;
     }
 
     @Override
@@ -61,7 +60,7 @@ public class TwoOptimizer extends TourOptimizer {
         double newDistance = calculator.between(p1, p3, earthRadius) +
                              calculator.between(p2, p4, earthRadius);
 
-        return newDistance < currentDistance; 
+        return newDistance < currentDistance;
     }
 
     private void performSwap(int i, int j) {
@@ -75,5 +74,9 @@ public class TwoOptimizer extends TourOptimizer {
             left++;
             right--;
         }
+    }
+
+    public Places getOptimizedTour() {
+        return currentTour;
     }
 }

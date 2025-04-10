@@ -10,81 +10,108 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTwoOptimizer {
 
-    private TwoOptimizer twoOptimizer;
     private Places places;
+    private DistanceCalculator mockCalculator;
+
+    private static class MockDistanceCalculator implements DistanceCalculator {
+        @Override
+        public long between(GeographicCoordinate p1, GeographicCoordinate p2, double radius) {
+            double lat1 = p1.latRadians();
+            double lon1 = p1.lonRadians();
+            double lat2 = p2.latRadians();
+            double lon2 = p2.lonRadians();
+            return (long) Math.sqrt(Math.pow(lat1 - lat2, 2) + Math.pow(lon1 - lon2, 2));
+        }
+    }
 
     @BeforeEach
     public void setUp() {
-        twoOptimizer = new TwoOptimizer();
-        places = new Places();
+        mockCalculator = new MockDistanceCalculator();
 
-        places.add(createPlace("36.3932", "25.4615")); 
-        places.add(createPlace("39.7392", "-104.9903")); 
-        places.add(createPlace("34.0522", "-118.2437")); 
+        places = new Places();
+        places.add(createPlace("36.3932", "25.4615"));
+        places.add(createPlace("39.7392", "-104.9903"));
+        places.add(createPlace("34.0522", "-118.2437"));
     }
 
-    private Place createPlace(String lat, String lng) {
-        Place place = new Place(); 
+    private Place createPlace(String lat, String lon) {
+        Place place = new Place();
         place.put("latitude", lat);
-        place.put("longitude", lng);
+        place.put("longitude", lon);
         return place;
     }
 
     @Test
-    @DisplayName("HarshithChitreddy: Test improve() runs without exceptions")
+    @DisplayName("reddy17: Improve should run without errors for valid inputs")
     public void testImproveRunsWithoutErrors() {
-        assertDoesNotThrow(() -> twoOptimizer.improve(), "Improve should execute without throwing exceptions.");
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve);
     }
 
     @Test
-    @DisplayName("HarshithChitreddy: Test improve() multiple times")
+    @DisplayName("reddy17: Improve should work when run multiple times")
     public void testImproveMultipleExecutions() {
-        twoOptimizer.improve();
-        assertDoesNotThrow(() -> twoOptimizer.improve(), "Improve should handle repeated execution safely.");
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, mockCalculator);
+        optimizer.improve();
+        assertDoesNotThrow(optimizer::improve);
     }
 
     @Test
-    @DisplayName("HarshithChitreddy: Test improve() with empty Places list")
+    @DisplayName("reddy17: Improve should handle empty places list")
     public void testImproveWithEmptyList() {
         Places emptyPlaces = new Places();
-        twoOptimizer.construct(emptyPlaces, 6371.0, "haversine", 1.0);
-        assertDoesNotThrow(() -> twoOptimizer.improve(), "Improve should not fail when places list is empty.");
+        TwoOptimizer optimizer = new TwoOptimizer(emptyPlaces, 6371.0, 1.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve);
     }
 
     @Test
-    @DisplayName("HarshithChitreddy: Test improve() with only two places")
+    @DisplayName("reddy17: Improve should not fail with only two places")
     public void testImproveWithTwoPlaces() {
-        Places minimalPlaces = new Places();
-        minimalPlaces.add(createPlace("48.8566", "2.3522"));  
-        minimalPlaces.add(createPlace("51.5074", "-0.1278")); 
-
-        twoOptimizer.construct(minimalPlaces, 6371.0, "haversine", 1.0);
-        assertDoesNotThrow(() -> twoOptimizer.improve(), "Improve should not modify a tour with only two locations.");
+        Places twoPlaces = new Places();
+        twoPlaces.add(createPlace("48.8566", "2.3522"));
+        twoPlaces.add(createPlace("51.5074", "-0.1278"));
+        TwoOptimizer optimizer = new TwoOptimizer(twoPlaces, 6371.0, 1.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve);
     }
 
     @Test
-    @DisplayName("HarshithChitreddy: Test improve() after valid construct() call")
-    public void testImproveAfterConstruct() {
-        twoOptimizer.construct(places, 6371.0, "vincenty", 1.5);
-        assertDoesNotThrow(() -> twoOptimizer.improve(), "Improve should run safely after a valid construct call.");
-    }
-
-    @Test
-    @DisplayName("HarshithChitreddy: Test improve() does not alter places if no swaps are needed")
+    @DisplayName("reddy17: Improve should not alter optimal tour")
     public void testImproveNoChangesNeeded() {
-        twoOptimizer.construct(places, 6371.0, "vincenty", 1.0);
-        Places originalTour = new Places();
-        originalTour.addAll(places);
-
-        twoOptimizer.improve();
-
-        assertEquals(originalTour, places, "Improve should not alter the tour if no swaps improve the route.");
+        Places tourCopy = new Places();
+        tourCopy.addAll(places);
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, mockCalculator);
+        optimizer.improve();
+        assertEquals(tourCopy, optimizer.getOptimizedTour());
     }
-    
+
     @Test
-    @DisplayName("lennoxxx: Test construct() initialized tours correctly")
-    public void testConstructInititalizeTours(){
-        twoOptimizer.construct(places, 4720.0, "vincenty", 1.0);
-        assertEquals(3, places.size());
+    @DisplayName("lennoxxx: Optimizer should initialize places correctly")
+    public void testConstructorInitializesToursCorrectly() {
+        TwoOptimizer optimizer = new TwoOptimizer(places, 4720.0, 1.0, mockCalculator);
+        assertEquals(3, optimizer.getOptimizedTour().size());
+    }
+
+    @Test
+    @DisplayName("reddy17: Improve should stop early due to response time limit")
+    public void testImproveStopsDueToResponseTime() {
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 0.00001, mockCalculator);
+        optimizer.improve();
+        assertNotNull(optimizer.getOptimizedTour());
+    }
+
+    @Test
+    @DisplayName("reddy17: Improve should do nothing when calculator is null")
+    public void testImproveWithNullCalculator() {
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, null);
+        optimizer.improve();
+        assertNotNull(optimizer.getOptimizedTour());
+    }
+
+    @Test
+    @DisplayName("reddy17: Improve should handle duplicate places gracefully")
+    public void testImproveWithDuplicatePlaces() {
+        places.add(createPlace("36.3932", "25.4615"));
+        TwoOptimizer optimizer = new TwoOptimizer(places, 6371.0, 1.0, mockCalculator);
+        assertDoesNotThrow(optimizer::improve);
     }
 }
