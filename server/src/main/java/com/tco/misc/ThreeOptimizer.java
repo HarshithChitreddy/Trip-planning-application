@@ -20,4 +20,8 @@ public class ThreeOptimizer extends TourOptimizer{
     public void improve(){
 
     }
+
+    public Places getOptimizedTour(){
+        return currentTour;
+    }
 }
