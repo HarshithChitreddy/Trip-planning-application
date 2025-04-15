@@ -294,6 +294,100 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "dnweath: Two Places Test with Haversine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54290c0d-67ca-48ea-9b4b-62b7594ddfa6",
+						"exec": [
+							"pm.test(\"dnweath: Two places with Haversine returns proper distances\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([4712,4712]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "18764250-0df8-4dc5-9e52-96e6a459574a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"formula\": \"haversine\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        },\r\n                {\r\n            \"name\": \"Location 2\",            \r\n            \"latitude\": \"90.0\",\r\n            \"longitude\": \"90.0\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dnweath: Three Places test with Haversine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f7bc5f90-e07e-4b5f-96ec-03a1602879d5",
+						"exec": [
+							"pm.test(\"dnweath: Two places with Haversine returns proper distances\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([4712,7069,3142]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a2702c64-9907-49de-a669-d47e7c0cf634",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"formula\": \"haversine\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        },\r\n                {\r\n            \"name\": \"Location 2\",            \r\n            \"latitude\": \"90.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n                {\r\n            \"name\": \"Location 3\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-45.0\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
