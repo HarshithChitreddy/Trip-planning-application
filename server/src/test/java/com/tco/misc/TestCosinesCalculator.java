@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestCosinesCalculator {
 
@@ -88,5 +89,49 @@ public class TestCosinesCalculator {
         long actualDistance = cosinesTest.between(point1, point2, radiusTest);
 
         assertEquals(20015L, actualDistance, DELTA, "Maximum distance for 180 degrees should be approximately 20015 km");
+    }
+
+    @DisplayName("kjell: Test CosinesCalculator: lat out of bounds (lat > 90)")
+    @Test
+    public void testLatOutOfBoundsPositive() {
+        Geo invalidPoint1 = new Geo(100.0, 90.0);
+        Geo invalidPoint2 = new Geo(90.0, Math.PI);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cosinesTest.between(invalidPoint1, invalidPoint2, radiusTest);
+        });
+    }
+
+    @DisplayName("kjell: Test CosinesCalculator: lat out of bounds (lat > 90)")
+    @Test
+    public void testLatOutOfBoundsNegative() {
+        Geo invalidPoint1 = new Geo(-100.0, 90.0);
+        Geo invalidPoint2 = new Geo(-90.0, Math.PI);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cosinesTest.between(invalidPoint1, invalidPoint2, radiusTest);
+        });
+    }
+
+    @DisplayName("kjell: Test CosinesCalculator: lon out of bounds (lon > 90)")
+    @Test
+    public void testLonOutOfBoundsPositive() {
+        Geo invalidPoint1 = new Geo(45.0, 200.0);
+        Geo invalidPoint2 = new Geo(-45.0, Math.PI);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cosinesTest.between(invalidPoint1, invalidPoint2, radiusTest);
+        });
+    }
+
+    @DisplayName("kjell: Test CosinesCalculator: lon out of bounds (lon > 90)")
+    @Test
+    public void testLonOutOfBoundsNegative() {
+        Geo invalidPoint1 = new Geo(45.0, -200.0);
+        Geo invalidPoint2 = new Geo(-45.0, Math.PI);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cosinesTest.between(invalidPoint1, invalidPoint2, radiusTest);
+        });
     }
 }
