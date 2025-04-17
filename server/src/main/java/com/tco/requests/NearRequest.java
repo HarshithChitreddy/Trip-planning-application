@@ -3,9 +3,7 @@ package com.tco.requests;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tco.misc.BadRequestException;
-import com.tco.misc.CalculatorFactory;
-import com.tco.misc.DistanceCalculator;
-import com.tco.misc.GeographicCoordinate;
+import com.tco.misc.GeographicLocations;
 
 public class NearRequest extends Request{
     private Places places;
@@ -19,7 +17,17 @@ public class NearRequest extends Request{
     private static final transient Logger log = LoggerFactory.getLogger(NearRequest.class);
 
     public void buildResponse() throws BadRequestException{
+        GeographicLocations geoLoc = new GeographicLocations();
+        
+        try {
+            places = geoLoc.near(place, distance, earthRadius, formula, limit);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }
 
+        this.distances = geoLoc.distances(place, places);
+
+        log.trace("buildResponse -> {}", this);
     }
 
     public void setDistance(int distance){
