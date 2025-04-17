@@ -6,8 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import com.tco.requests.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 public class TestGeographicLocations {
     Place place;
@@ -96,6 +99,33 @@ public class TestGeographicLocations {
             geoLoc.near(place, 50, earthRadius, formula, limit);
         });
     }
+    @DisplayName("reddy17: Test getTypes returns 'city'")
+    @Test
+    public void testGetTypes() {
+        List<String> types = geoLoc.getTypes();
+        assertNotNull(types, "Types list should not be null");
+        assertTrue(types.contains("city"), "Types should contain 'city'");
+    }
 
+    @DisplayName("reddy17: Test distances with empty places list")
+    @Test
+    public void testDistancesWithEmptyPlaces() {
+        Places emptyPlaces = new Places();
+        
+        Distances emptyDistances = geoLoc.distances(place, emptyPlaces);
+        
+        assertNotNull(emptyDistances, "Distances should not be null");
+        assertEquals(emptyDistances.size(), 0, "Distances should be empty when there are no places");
+    }
+
+    @DisplayName("reddy17: Test CalculatorFactory is used correctly")
+    @Test
+    public void testCalculatorInitialization() throws BadRequestException {
+        formula = "vincenty";
+        
+        geoLoc.near(place, 50, earthRadius, formula, limit);
+        
+        assertNotNull(geoLoc.calculator, "Calculator should be initialized correctly using the formula");
+    }
 
 }
