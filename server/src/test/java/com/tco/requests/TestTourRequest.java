@@ -226,5 +226,20 @@ public class TestTourRequest {
         tourRequest.buildResponse();
         assertEquals("haversine", tourRequest.getFormula());
     }
+    @Test
+    @DisplayName("chrisc23: Test buildResponse() with vincenty formula")
+    public void testBuildResponseVincenty() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        testPlaces.add(place3);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula("vincenty");
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
+    
+        tourRequest.buildResponse();
+        assertNotNull(tourRequest.getPlaces());
+        assertEquals(3, tourRequest.getPlaces().size());
+    }
     
 }
