@@ -292,6 +292,21 @@
 		},
 		{
 			"name": "kjell: test Postman tour request case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76961270-2595-474c-bb2f-f2249a3b5a41",
+						"exec": [
+							"pm.test(\"kjell: Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "5b5926af-e7be-4617-9655-161440be590c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -323,6 +338,21 @@
 		},
 		{
 			"name": "kjell: test Postman tour request case, formula Vincenty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6e2dd96-39e6-4cec-a530-1d7f57a218d6",
+						"exec": [
+							"pm.test(\"kjell: Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "1dd6f0f2-a04b-4333-8775-719c08199778",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -354,6 +384,21 @@
 		},
 		{
 			"name": "kjell: test Postman tour request case, formula Haversine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "85834213-184b-4d38-9029-d0cca4a9fcf1",
+						"exec": [
+							"pm.test(\"kjell: Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "0da2f0e9-e221-407a-b6a9-3734d3d80b44",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -385,6 +430,21 @@
 		},
 		{
 			"name": "kjell: test Postman tour request case, formula Cosines",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1536f6ab-5027-4cc1-909b-1c1662779bf5",
+						"exec": [
+							"pm.test(\"kjell: Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "08562c71-142c-44a0-bb0f-85f2f1fc7a67",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
