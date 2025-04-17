@@ -686,6 +686,54 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "reddy17: empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91601cf0-ec04-4a05-821e-27d881f85240",
+						"exec": [
+							"pm.test(\"reddy18: Two places should be returned\", () => {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res.places.length).to.eql(2);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "d267cd6c-3be1-4e7a-81ae-184d32e5ed3d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371,\r\n    \"response\": 1.0,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        { \"name\": \"Lake Tahoe\", \"latitude\": \"39.0968\", \"longitude\": \"-120.0324\" },\r\n        { \"name\": \"Grand Canyon\", \"latitude\": \"36.1069\", \"longitude\": \"-112.1129\" }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
