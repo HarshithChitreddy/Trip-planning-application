@@ -522,7 +522,7 @@
 					"script": {
 						"id": "d20c3ba2-fe3b-49e1-852c-63ca2bf5d351",
 						"exec": [
-							"pm.test(\"reddy24: Distances should be calculated and returned correctly\", () => {",
+							"pm.test(\"reddy17: Distances should be calculated and returned correctly\", () => {",
 							"    const responseJson = pm.response.json();",
 							"    pm.expect(responseJson.distances[0]).to.be.a('number');",
 							"    pm.expect(responseJson.distances[0]).to.be.within(0, 6371);",
@@ -544,6 +544,54 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"requestType\": \"distances\",\r\n  \"places\": [\r\n    { \"name\": \"Place A\", \"latitude\": \"10.0\", \"longitude\": \"20.0\" },\r\n    { \"name\": \"Place B\", \"latitude\": \"30.0\", \"longitude\": \"40.0\" }\r\n  ],\r\n  \"earthRadius\": 6371,\r\n  \"formula\": \"cosines\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reddy17: Test for ensuring the \"places\" field is an array",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d20c3ba2-fe3b-49e1-852c-63ca2bf5d351",
+						"exec": [
+							"pm.test(\"reddy17: Places should be an array\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.places).to.be.an('array');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "22406030-c032-4a5c-891f-be63b451851d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"distances\",\r\n  \"places\": [\r\n    { \"name\": \"Place A\", \"latitude\": \"40.0\", \"longitude\": \"-105.0\" },\r\n    { \"name\": \"Place B\", \"latitude\": \"41.0\", \"longitude\": \"-106.0\" }\r\n  ],\r\n  \"earthRadius\": 6371,\r\n  \"formula\": \"cosines\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
