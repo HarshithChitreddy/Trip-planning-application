@@ -42,4 +42,22 @@ public class TestSelect {
         
         assertTrue(queryElements[8].equals("-90.0"));
     }
+    
+    @DisplayName("chrisc23: basic SQL Structure")
+    @Test
+    public void testNearBasicSQLStructure() {
+        Place place = new Place();
+        place.put("latitude", "40.0");
+        place.put("longitude", "-105.0");
+
+        String sql = Select.near(5, place, 100);
+
+        assertNotNull(sql);
+        assertTrue(sql.contains("SELECT"));
+        assertTrue(sql.contains("FROM cities"));
+        assertTrue(sql.contains("lat BETWEEN"));
+        assertTrue(sql.contains("lng BETWEEN"));
+        assertTrue(sql.contains("LIMIT 5"));
+    }
+    
 }
