@@ -1,5 +1,7 @@
 package com.tco.misc;
 
+import java.util.List;
+
 import com.tco.requests.Place;
 
 public class Select {
@@ -40,5 +42,8 @@ public class Select {
                   + where
                   + limit
                   + " ;";
+    }
+    static String find(String match,List<String> type, String[] here, int limit) {
+        return null;
     }
 }
