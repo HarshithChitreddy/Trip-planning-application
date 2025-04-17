@@ -22,11 +22,9 @@ public class Select {
         Double lonRange = (double) distance / (69 * Math.cos(Double.parseDouble(place.get("latitude"))));
 
         Double lonLowValue = Double.parseDouble(place.get("longitude")) - lonRange;
-        lonLowValue = ((lonLowValue + 180.0) % 360.0) - 180.0; // Account for going over/under 180/-180
         String lonLow = String.valueOf(lonLowValue);
 
         Double lonHighValue = Double.parseDouble(place.get("longitude")) + lonRange;
-        lonHighValue = ((lonHighValue + 180.0) % 360.0) -180.0;
         String lonHigh = String.valueOf(lonHighValue);
         
         // international date line wrapping at 180,-180
