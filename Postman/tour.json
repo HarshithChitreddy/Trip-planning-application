@@ -576,6 +576,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "chrisc23: added a 0.01 response time",
+			"id": "7ef1e401-e217-4487-a14e-a84abf4003a3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371.0,\r\n    \"response\": 0.01,\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Former Resting Place of the Vasa Ship\",\r\n            \"municipality\": \"Stockholm\",\r\n            \"region\": \"Svealand\",\r\n            \"country\": \"Kingdom of Sweden\",\r\n            \"latitude\": \"59.32778\",\r\n            \"longitude\": \"18.09111\"\r\n        },\r\n        {\r\n            \"name\": \"Charlestown Navy Yard, home of USS Constitution\",\r\n            \"municipality\": \"Boston\",\r\n            \"region\": \"Massachusetts\",\r\n            \"country\": \"United States of America\",\r\n            \"latitude\": \"42.373293\",\r\n            \"longitude\": \"-71.056624\"\r\n        },\r\n        {\r\n            \"name\": \"Former Resting Place of the Mary Rose\",\r\n\t\t\t\"municipality\": \"Solent Strait\",\r\n\t\t\t\"region\": \"English Channel\",\r\n\t\t\t\"country\": \"United Kingdom\",\r\n\t\t\t\"latitude\": \"50.786667\",\r\n\t\t\t\"longitude\": \"-1.295\"\r\n        },\r\n        {\r\n            \"name\": \"Site of the Battle of Trafalgar\",\r\n\t\t\t\"municipality\": \"Cape of Trafalgar\",\r\n\t\t\t\"region\": \"Cadiz\",\r\n\t\t\t\"country\": \"Kingdom of Spain\",\r\n\t\t\t\"latitude\": \"36.2930\",\r\n\t\t\t\"longitude\": \"-6.2553\"\r\n        },\r\n        {\r\n            \"name\": \"Current Home Port of HMS Trincomalee\",\r\n\t\t\t\"municipality\": \"Hartlepool\",\r\n\t\t\t\"region\": \"County Durham\",\r\n\t\t\t\"country\": \"United Kingdom\",\r\n\t\t\t\"latitude\": \"54.699444\",\r\n\t\t\t\"longitude\": \"-1.3925\"\r\n        },\r\n        {\r\n            \"name\": \"Age of Sail Heritage Museum\",\r\n\t\t\t\"municipality\": \"Port Greville\",\r\n\t\t\t\"region\": \"Nova Scotia\",\r\n\t\t\t\"country\": \"Canada\",\r\n\t\t\t\"latitude\": \"45.4148325\",\r\n\t\t\t\"longitude\": \"-64.5525954\"\r\n        },\r\n        {\r\n            \"name\": \"Site of the 1798 Battle of the Nile\",\r\n\t\t\t\"municipality\": \"Aboukir Bay\",\r\n\t\t\t\"region\": \"Nile Delta\",\r\n\t\t\t\"country\": \"Arab Republic of Egypt\",\r\n\t\t\t\"latitude\": \"31.4417\",\r\n\t\t\t\"longitude\": \"30.2833\"\r\n        },\r\n        {\r\n            \"name\": \"Site of the 1801 Battle of Copenhagen\",\r\n\t\t\t\"municipality\": \"Copenhagen Harbor\",\r\n\t\t\t\"region\": \"Copenhagen\",\r\n\t\t\t\"country\": \"Kingdom of Denmark\",\r\n\t\t\t\"latitude\": \"55.702778\",\r\n\t\t\t\"longitude\": \"12.613333\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
