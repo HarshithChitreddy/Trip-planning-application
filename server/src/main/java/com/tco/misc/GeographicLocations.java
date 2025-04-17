@@ -12,14 +12,17 @@ public class GeographicLocations {
     DistanceCalculator calculator;
     double earthRadius;
     
-    public Places near(Place place, long distance, double earthRadius, String formula, int limit) throws BadRequestException {
-        Places nearPlaces = new Places();
-
+    public Places near(Place place, Integer distance, double earthRadius, String formula, int limit) throws BadRequestException {
         this.calculatorFactory = new CalculatorFactory();
         this.calculator = calculatorFactory.get(formula);
         this.earthRadius = earthRadius;
 
-        return nearPlaces;
+        try {
+            return Database.places(Select.near(limit, place, distance), limit);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }
+        
     }
 
     public Distances distances(Place place, Places places) {

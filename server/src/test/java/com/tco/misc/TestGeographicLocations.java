@@ -56,8 +56,6 @@ public class TestGeographicLocations {
         geoLoc.near(place, 50, earthRadius, formula, limit);
         distances = geoLoc.distances(place, places);
 
-        System.out.println(distances.get(0));
-
         assertEquals(distances.get(0), 2356l);
         assertEquals(distances.get(1), 3142l);
     }
@@ -70,8 +68,6 @@ public class TestGeographicLocations {
         geoLoc.near(place, 50, earthRadius, formula, limit);
         distances = geoLoc.distances(place, places);
 
-        System.out.println(distances.get(0));
-
         assertEquals(distances.get(0), 2356l);
         assertEquals(distances.get(1), 3142l);
     }
@@ -83,8 +79,6 @@ public class TestGeographicLocations {
         
         geoLoc.near(place, 50, earthRadius, formula, limit);
         distances = geoLoc.distances(place, places);
-
-        System.out.println(distances.get(0));
 
         assertEquals(distances.get(0), 2356l);
         assertEquals(distances.get(1), 3142l);
