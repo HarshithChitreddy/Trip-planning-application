@@ -17,7 +17,7 @@ public class ConfigRequest extends Request {
     private List<String> features;
     private Team team;
     private People people;
-    private GeographicLocations geographicLocations;
+    // private GeographicLocations geographicLocations;
 
     @Override
     public void buildResponse() {
@@ -35,8 +35,7 @@ public class ConfigRequest extends Request {
         formulae.add("haversine");
         formulae.add("cosines");
 
-        geographicLocations = new GeographicLocations();
-        
+        // geographicLocations = new GeographicLocations();
         
         log.trace("buildResponse -> {}", this);
     }
@@ -47,7 +46,7 @@ public class ConfigRequest extends Request {
 
     public ConfigRequest() {
         this.requestType = "config";
-        this.geographicLocations = new GeographicLocations();
+        // this.geographicLocations = new GeographicLocations();
     }
 
     public List<String> getFeatures() {
@@ -64,7 +63,7 @@ public class ConfigRequest extends Request {
         return features.contains(feature);
     }
 
-    public List<String> getLocationTypes() {
-        return geographicLocations.getTypes(); 
-    }
+//     public List<String> getLocationTypes() {
+//         return geographicLocations.getTypes(); 
+//     }
 }

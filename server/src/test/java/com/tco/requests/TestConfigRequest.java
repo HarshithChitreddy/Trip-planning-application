@@ -78,10 +78,10 @@ public class TestConfigRequest {
     }
     */
 
-    @Test
-    @DisplayName("reddy17: Verify getLocationTypes returns 'city' for geographic locations")
-    public void testGetLocationTypes() {
-        ConfigRequest configRequest = new ConfigRequest();
-        assertTrue(configRequest.getLocationTypes().contains("city"), "Location types should contain 'city'");
-    }
+    // @Test
+    // @DisplayName("reddy17: Verify getLocationTypes returns 'city' for geographic locations")
+    // public void testGetLocationTypes() {
+    //     ConfigRequest configRequest = new ConfigRequest();
+    //     assertTrue(configRequest.getLocationTypes().contains("city"), "Location types should contain 'city'");
+    // }
 }
