@@ -482,6 +482,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "chrisc23: added 5 places",
+			"id": "4e76baf9-a416-40c1-86a2-4ef1bed89b06",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Location 1\",\r\n            \"latitude\": \"40.58\",\r\n            \"longitude\": \"-105.09\"\r\n        },\r\n                {\r\n            \"name\": \"Location 2\",            \r\n            \"latitude\": \"39.94\",\r\n            \"longitude\": \"-104.08\"\r\n        },\r\n                {\r\n            \"name\": \"Location 3\",\r\n            \"latitude\": \"40.15\",\r\n            \"longitude\": \"-106.73\"\r\n        },\r\n        {\r\n            \"name\": \"Caribou Island\",\r\n            \"latitude\": \"47.357645\",\r\n            \"longitude\": \"-85.808298\"\r\n        },\r\n        {\r\n            \"name\": \"Bear Island\",\r\n            \"latitude\": \"74.441913\",\r\n            \"longitude\": \"19.060965\"\r\n        },\r\n        {\r\n            \"name\": \"Kangaroo Island\",\r\n            \"latitude\": \"-35.794981\",\r\n            \"longitude\": \"137.266003\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
