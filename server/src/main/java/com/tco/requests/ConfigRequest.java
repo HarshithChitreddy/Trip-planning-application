@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.tco.misc.Team;
 import com.tco.misc.People;
+import com.tco.misc.GeographicLocations;
 
 public class ConfigRequest extends Request {
 
@@ -16,6 +17,7 @@ public class ConfigRequest extends Request {
     private List<String> features;
     private Team team;
     private People people;
+    private GeographicLocations geographicLocations;
 
     @Override
     public void buildResponse() {
@@ -31,6 +33,8 @@ public class ConfigRequest extends Request {
         formulae.add("vincenty");
         formulae.add("haversine");
         formulae.add("cosines");
+
+        geographicLocations = new GeographicLocations();
         
         
         log.trace("buildResponse -> {}", this);
@@ -42,6 +46,7 @@ public class ConfigRequest extends Request {
 
     public ConfigRequest() {
         this.requestType = "config";
+        this.geographicLocations = new GeographicLocations();
     }
 
     public List<String> getFeatures() {
@@ -56,5 +61,9 @@ public class ConfigRequest extends Request {
 
     public boolean validFeature(String feature){
         return features.contains(feature);
+    }
+
+    public List<String> getLocationTypes() {
+        return geographicLocations.getTypes(); 
     }
 }
