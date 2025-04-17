@@ -12,11 +12,22 @@ public class Database {
     private final static String COLUMNS = "city,city_ascii,city_alt,lat,lng,country,admin_name,admin_name_ascii,admin_type";
 
     static Places places(String sql, Integer limit) throws Exception {
-        return new Places();
+        String url = Credential.URL;
+        String user = Credential.USER;
+        String password = Credential.PASSWORD;
+        try (
+              // connect to the database and query
+              Connection conn = DriverManager.getConnection(url, user, password);
+              Statement query = conn.createStatement();
+              ResultSet results = query.executeQuery(sql);
+        ) {
+            return convertQueryResultsToPlaces(results, COLUMNS);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    private static Places convertQueryResultsToPlaces(ResultSet results, String columns)
-    throws Exception {
+    private static Places convertQueryResultsToPlaces(ResultSet results, String columns) throws Exception {
         String[] cols = columns.split(",");
         Places places = new Places();
         while (results.next()) {
