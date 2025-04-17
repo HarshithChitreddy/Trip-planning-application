@@ -322,6 +322,99 @@
 			"response": []
 		},
 		{
+			"name": "kjell: test Postman tour request case, formula Vincenty",
+			"id": "1dd6f0f2-a04b-4333-8775-719c08199778",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371,\r\n    \"response\": 0.5,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Sun Wukong\",\r\n            \"municipality\": \"Waterfall Cave\",\r\n            \"region\": \"Mountain of Flowers and Fruit\",\r\n            \"country\": \"Aolai\",\r\n            \"latitude\": \"45.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Subodhi\",\r\n            \"municipality\": \"Cave of the Moon and Three Stars\",\r\n            \"region\": \"Mountain of Mind and Heart\",\r\n            \"country\": \"Continent to the West\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-90.0\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kjell: test Postman tour request case, formula Haversine",
+			"id": "0da2f0e9-e221-407a-b6a9-3734d3d80b44",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371,\r\n    \"response\": 0.5,\r\n    \"formula\": \"haversine\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Sun Wukong\",\r\n            \"municipality\": \"Waterfall Cave\",\r\n            \"region\": \"Mountain of Flowers and Fruit\",\r\n            \"country\": \"Aolai\",\r\n            \"latitude\": \"45.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Subodhi\",\r\n            \"municipality\": \"Cave of the Moon and Three Stars\",\r\n            \"region\": \"Mountain of Mind and Heart\",\r\n            \"country\": \"Continent to the West\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-90.0\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kjell: test Postman tour request case, formula Cosines",
+			"id": "08562c71-142c-44a0-bb0f-85f2f1fc7a67",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371,\r\n    \"response\": 0.5,\r\n    \"formula\": \"cosines\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Sun Wukong\",\r\n            \"municipality\": \"Waterfall Cave\",\r\n            \"region\": \"Mountain of Flowers and Fruit\",\r\n            \"country\": \"Aolai\",\r\n            \"latitude\": \"45.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Subodhi\",\r\n            \"municipality\": \"Cave of the Moon and Three Stars\",\r\n            \"region\": \"Mountain of Mind and Heart\",\r\n            \"country\": \"Continent to the West\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-90.0\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "lennoxxx: Invalid response returns 400 error code",
 			"event": [
 				{
