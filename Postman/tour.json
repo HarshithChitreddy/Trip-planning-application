@@ -607,6 +607,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "chrisc23: added a test for 5 places",
+			"id": "f267a1db-f268-4390-ac93-53db6738630d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        },\r\n        {\r\n            \"name\": \"Go Brewing\",\r\n            \"municipality\": \"Naperville\",\r\n            \"region\": \"Illinois\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"90.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Eastern Market Brewing Co.\",\r\n            \"municipality\": \"Detroit\",\r\n            \"region\": \"Michigan\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"0.0\",\r\n            \"longitude\": \"0.0\"\r\n        },\r\n        {\r\n            \"name\": \"Death of the Fox Brewing Company\",\r\n            \"municipality\": \"Clarksboro\",\r\n            \"region\": \"New Jersey\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"90.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Former Resting Place of the Vasa Ship\",\r\n            \"municipality\": \"Stockholm\",\r\n            \"region\": \"Svealand\",\r\n            \"country\": \"Kingdom of Sweden\",\r\n            \"latitude\": \"59.32778\",\r\n            \"longitude\": \"18.09111\"\r\n        },\r\n        {\r\n            \"name\": \"Charlestown Navy Yard, home of USS Constitution\",\r\n            \"municipality\": \"Boston\",\r\n            \"region\": \"Massachusetts\",\r\n            \"country\": \"United States of America\",\r\n            \"latitude\": \"42.373293\",\r\n            \"longitude\": \"-71.056624\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
