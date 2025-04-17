@@ -46,4 +46,7 @@ public class Select {
     static String find(String match,List<String> type, String[] here, int limit) {
         return null;
     }
+    static String found(String match, List<String> type, String[] here) {
+    return null;
+    }
 }
