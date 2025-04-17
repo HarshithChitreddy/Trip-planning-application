@@ -435,6 +435,53 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "lennoxxx: Three Places Vincenty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "004fa529-bab2-4baf-8d54-e8f87a3a2c5c",
+						"exec": [
+							"pm.test(\"lennoxxx: Three places with Vincenty returns proper distances\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([31,39,20]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "8e4f079a-2462-4c23-b101-84a663746873",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Fort Collins\",\r\n            \"latitude\": \"40.570988\",\r\n            \"longitude\": \"105.123711\"\r\n        },\r\n        {\r\n            \"name\": \"Cheyenne\",            \r\n            \"latitude\": \"41.130120\",\r\n            \"longitude\": \"104.848022\"\r\n        },\r\n        {\r\n            \"name\": \"Greeley\",            \r\n            \"latitude\": \"40.390620\",\r\n            \"longitude\": \"104.679565\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
