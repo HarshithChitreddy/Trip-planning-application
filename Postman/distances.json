@@ -388,6 +388,53 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "kjell: Test distances with two places, formula Vincenty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d81918f-af89-4c85-bdc1-49d436510809",
+						"exec": [
+							"pm.test(\"kjell: Two places with Vincenty returns proper distances\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.distances).to.eql([9425, 9425]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "6da5968a-5f5c-4749-b88e-bb0c868510be",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Sun Wukong\",\r\n            \"municipality\": \"Waterfall Cave\",\r\n            \"region\": \"Mountain of Flowers and Fruit\",\r\n            \"country\": \"Aolai\",\r\n            \"latitude\": \"45.0\",\r\n            \"longitude\": \"90.0\"\r\n        },\r\n        {\r\n            \"name\": \"Subodhi\",\r\n            \"municipality\": \"Cave of the Moon and Three Stars\",\r\n            \"region\": \"Mountain of Mind and Heart\",\r\n            \"country\": \"Continent to the West\",\r\n            \"latitude\": \"-45.0\",\r\n            \"longitude\": \"-90.0\"\r\n        }\r\n    ],\r\n    \"earthRadius\": 3000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
