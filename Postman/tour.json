@@ -693,11 +693,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "91601cf0-ec04-4a05-821e-27d881f85240",
+						"id": "4a5d51ce-27f2-4b27-b52e-aa17508acbaf",
 						"exec": [
-							"pm.test(\"reddy18: Two places should be returned\", () => {",
+							"pm.test(\"reddy17: All places should have non-empty names\", () => {",
 							"    const res = pm.response.json();",
-							"    pm.expect(res.places.length).to.eql(2);",
+							"    res.places.forEach(place => {",
+							"        pm.expect(place.name).to.be.a('string').that.is.not.empty;",
+							"    });",
 							"});",
 							""
 						],
