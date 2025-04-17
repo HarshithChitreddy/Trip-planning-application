@@ -513,6 +513,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "reddy17: ensuring distances are calculated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d20c3ba2-fe3b-49e1-852c-63ca2bf5d351",
+						"exec": [
+							"pm.test(\"reddy24: Distances should be calculated and returned correctly\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.distances[0]).to.be.a('number');",
+							"    pm.expect(responseJson.distances[0]).to.be.within(0, 6371);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "aacb7ab4-6ad5-48da-b1b5-8776f6c6c841",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"distances\",\r\n  \"places\": [\r\n    { \"name\": \"Place A\", \"latitude\": \"10.0\", \"longitude\": \"20.0\" },\r\n    { \"name\": \"Place B\", \"latitude\": \"30.0\", \"longitude\": \"40.0\" }\r\n  ],\r\n  \"earthRadius\": 6371,\r\n  \"formula\": \"cosines\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
