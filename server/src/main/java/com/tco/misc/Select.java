@@ -43,10 +43,10 @@ public class Select {
                   + limit
                   + " ;";
     }
-    static String find(String match,List<String> type, String[] here, int limit) {
+    static String find(String match,List<String> type, List<String> here, int limit) {
         return null;
     }
-    static String found(String match, List<String> type, String[] here) {
+    static String found(String match, List<String> type, List<String> here) {
     return null;
     }
 }
