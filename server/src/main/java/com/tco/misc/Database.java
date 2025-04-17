@@ -14,4 +14,29 @@ public class Database {
     static Places places(String sql, Integer limit) throws Exception {
         return new Places();
     }
+
+    private static Places convertQueryResultsToPlaces(ResultSet results, String columns)
+    throws Exception {
+        String[] cols = columns.split(",");
+        Places places = new Places();
+        while (results.next()) {
+            Place place = new Place();
+            for (String col : cols) {
+                if (col.equals("city")) {
+                    place.put("name", results.getString(col));
+                    place.put("municipality", results.getString(col));
+                } else if (col.equals("lat")) {
+                    place.put("latitude", results.getString(col));
+                } else if (col.equals("lng")) {
+                    place.put("longitude", results.getString(col));
+                } else if (col.equals("country")) {
+                    place.put("country", results.getString(col));
+                } else if (col.equals("admin_name")) {
+                    place.put("region", results.getString(col));
+                }
+            }
+            places.add(place);
+        }
+        return places;
+    }
 }
