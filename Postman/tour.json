@@ -695,7 +695,7 @@
 					"script": {
 						"id": "4a5d51ce-27f2-4b27-b52e-aa17508acbaf",
 						"exec": [
-							"pm.test(\"reddy17: All places should have non-empty names\", () => {",
+							"pm.test(\"Reddy17: All places should have non-empty names\", () => {",
 							"    const res = pm.response.json();",
 							"    res.places.forEach(place => {",
 							"        pm.expect(place.name).to.be.a('string').that.is.not.empty;",
