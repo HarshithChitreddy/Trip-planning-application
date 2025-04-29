@@ -1,5 +1,4 @@
 package com.tco.misc;
-import com.tco.misc.GeographicCoordinate;
 
 public interface DistanceCalculator {
 
