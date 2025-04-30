@@ -32,7 +32,10 @@ public class Select {
         // international date line wrapping at 180,-180
         String where =  " WHERE lat BETWEEN " + latLow + " AND " + latHigh + " AND lng BETWEEN " + 
             Math.min(Double.parseDouble(lonHigh), Double.parseDouble(lonLow)) + " AND " + Math.max(Double.parseDouble(lonHigh), Double.parseDouble(lonLow)) + " ";
-        return statement(where, COLUMNS + " ", "LIMIT " + limit);
+
+        // Order by the small difference between places lat/long value and the values in the database
+        String orderBy = "ORDER BY ABS(lat - " + place.get("latitude") + ") + ABS(lng - " + place.get("longitude") + ") ";
+        return statement(where, COLUMNS + " ", orderBy + "LIMIT " + limit);
     }
 
     private static String statement(String where, String data, String limit) {
