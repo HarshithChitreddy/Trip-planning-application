@@ -21,7 +21,20 @@ public class NearRequest extends Request {
         GeographicLocations geoLoc = new GeographicLocations();
 
         try {
-            double lon = Double.parseDouble(place.get("longitude"));
+            if (place == null) {
+                log.error("Place object is null.");
+                throw new BadRequestException();
+            }
+
+            log.info("Place values received: {}", place);
+
+            String lonStr = place.get("longitude");
+            if (lonStr == null) {
+                log.error("Longitude is missing in the place.");
+                throw new BadRequestException();
+            }
+
+            double lon = Double.parseDouble(lonStr);
             if (lon < -180.0 || lon > 180.0) {
                 throw new IllegalArgumentException("Longitude out of bounds: " + lon);
             }
@@ -40,35 +53,13 @@ public class NearRequest extends Request {
         log.trace("buildResponse -> {}", this);
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
+    public void setDistance(int distance) { this.distance = distance; }
+    public void setFormula(String formula) { this.formula = formula; }
+    public void setEarthRadius(double earthRadius) { this.earthRadius = earthRadius; }
+    public void setLimit(int limit) { this.limit = limit; }
 
-    public void setFormula(String formula) {
-        this.formula = formula;
-    }
-
-    public void setEarthRadius(double earthRadius) {
-        this.earthRadius = earthRadius;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public String getFormula() {
-        return formula;
-    }
-
-    public double getEarthRadius() {
-        return earthRadius;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
+    public int getDistance() { return distance; }
+    public String getFormula() { return formula; }
+    public double getEarthRadius() { return earthRadius; }
+    public int getLimit() { return limit; }
 }
