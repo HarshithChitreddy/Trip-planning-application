@@ -67,4 +67,23 @@ public class TestNoOptimizer {
         assertEquals(places, result);  
     }
     
+    @DisplayName("reddy17: test with empty Places list")
+    @Test
+    public void testConstructWithEmptyPlaces() {
+        NoOptimizer noOptimizer = new NoOptimizer();
+        Places result = noOptimizer.construct(places, 10.0, "someFormula", 0.0);
+        assertEquals(0, result.size());
+        assertEquals(places, result);
+    }
+
+    @DisplayName("reddy17: test identity of returned Places object")
+    @Test
+    public void testConstructReturnsSameReference() {
+        places.add(createPlace("40.0", "-105.0"));
+        NoOptimizer noOptimizer = new NoOptimizer();
+        Places result = noOptimizer.construct(places, 10.0, "great-circle", 0.0);
+        assertTrue(result == places, "NoOptimizer should return the same reference, not a copy.");
+    }
+    
+    
 }
