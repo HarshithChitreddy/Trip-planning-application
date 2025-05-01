@@ -21,7 +21,6 @@ public void buildResponse() throws BadRequestException{
 public void setLimit(Integer limit){
     this.limit = limit;
 }
-public Integer getLimit(){
-    return limit;
-}
+
+public Integer getLimit(){return limit;}
 }
