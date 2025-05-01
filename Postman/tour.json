@@ -148,6 +148,54 @@
 			"response": []
 		},
 		{
+			"name": "reddy17: Returned place has the correct latitude",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "285d429c-5526-4432-a6ee-aae66c25b79a",
+						"exec": [
+							"pm.test(\"reddy17: Returned place has the correct latitude\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.places[0].latitude).to.eql(\"33.034500\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a1eccd27-7c96-4e95-a0f9-347ba5b7f17e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.034500\",\r\n            \"longitude\": \"-85.030339\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "reddy17: Valid Tour with Two Places",
 			"event": [
 				{
