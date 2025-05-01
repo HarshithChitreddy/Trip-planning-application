@@ -1,7 +1,5 @@
 package com.tco.misc;
 
-import com.tco.misc.GeographicCoordinate;
-
 public class VincentyCalculator implements DistanceCalculator {
     @Override
     public long between(GeographicCoordinate from, GeographicCoordinate to, double earthRadius) {
