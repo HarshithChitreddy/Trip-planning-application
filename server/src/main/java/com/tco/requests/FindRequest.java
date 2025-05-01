@@ -18,8 +18,9 @@ public class FindRequest extends Request{
 public void buildResponse() throws BadRequestException{
     
 }
-
-public Integer getLimit(){
-    return limit;
+public void setLimit(Integer limit){
+    this.limit = limit;
 }
+
+public Integer getLimit(){return limit;}
 }
