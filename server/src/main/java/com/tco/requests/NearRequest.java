@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import com.tco.misc.BadRequestException;
 import com.tco.misc.GeographicLocations;
 
-public class NearRequest extends Request{
+public class NearRequest extends Request {
     private Places places;
     private Place place;
     private Distances distances;
@@ -16,44 +16,59 @@ public class NearRequest extends Request{
 
     private static final transient Logger log = LoggerFactory.getLogger(NearRequest.class);
 
-    public void buildResponse() throws BadRequestException{
+    @Override
+    public void buildResponse() throws BadRequestException {
         GeographicLocations geoLoc = new GeographicLocations();
-        
+
         try {
+            double lon = Double.parseDouble(place.get("longitude"));
+            if (lon < -180.0 || lon > 180.0) {
+                throw new IllegalArgumentException("Longitude out of bounds: " + lon);
+            }
+
             places = geoLoc.near(place, distance, earthRadius, formula, limit);
+            this.distances = geoLoc.distances(place, places);
+
+        } catch (IllegalArgumentException e) {
+            log.error("Validation error: {}", e.getMessage());
+            throw new BadRequestException();
         } catch (Exception e) {
+            log.error("Unexpected error in near request: {}", e.getMessage());
             throw new BadRequestException();
         }
-
-        this.distances = geoLoc.distances(place, places);
 
         log.trace("buildResponse -> {}", this);
     }
 
-    public void setDistance(int distance){
+    public void setDistance(int distance) {
         this.distance = distance;
     }
-    public void setFormula(String formula){
+
+    public void setFormula(String formula) {
         this.formula = formula;
     }
-    public void setEarthRadius(double earthRadius){
+
+    public void setEarthRadius(double earthRadius) {
         this.earthRadius = earthRadius;
     }
-    public void setLimit(int limit){
+
+    public void setLimit(int limit) {
         this.limit = limit;
     }
-    
-    public int getDistance(){ return distance; }
 
-    public String getFormula(){ return formula; }
+    public int getDistance() {
+        return distance;
+    }
 
-    public double getEarthRadius(){ return earthRadius; }
+    public String getFormula() {
+        return formula;
+    }
 
-    public int getLimit(){ return limit; }
+    public double getEarthRadius() {
+        return earthRadius;
+    }
 
-
-    
-
-
-    
+    public int getLimit() {
+        return limit;
+    }
 }
