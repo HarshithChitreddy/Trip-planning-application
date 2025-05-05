@@ -14,13 +14,17 @@ public class FindRequest extends Request{
     protected Integer found;
     private static final transient Logger log = LoggerFactory.getLogger(NearRequest.class);
 
-@Override
-public void buildResponse() throws BadRequestException{
-    
-}
-public void setLimit(Integer limit){
-    this.limit = limit;
-}
+    @Override
+    public void buildResponse() throws BadRequestException{
+        
+    }
+    public void setLimit(Integer limit){
+        this.limit = limit;
+    }
 
-public Integer getLimit(){return limit;}
+    public Integer getLimit(){return limit;}
+    
+    public void setWhere(String[] where){
+        this.where = where;
+    }
 }
