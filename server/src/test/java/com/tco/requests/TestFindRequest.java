@@ -9,6 +9,7 @@ class FindRequestTest {
 
     private FindRequest request;
     private Integer limit;
+    private String[] where;
 
     @BeforeEach
     void setUp() {
@@ -17,7 +18,7 @@ class FindRequestTest {
 
     @Test
     @DisplayName("lennoxxx: Test get/set limit")
-    void testGetSetLimit() {
+    public void testGetSetLimit() {
         limit = 5;
         request.setLimit(limit);
         assertEquals(limit, request.getLimit());
@@ -25,7 +26,31 @@ class FindRequestTest {
 
     @Test
     @DisplayName("lennoxxx: Test null limit")
-    void testNullLimit() {
+    public void testNullLimit() {
         assertNull(request.getLimit());
     }
+
+    @Test
+    @DisplayName("lennoxxx: Test get/set where")
+    public void testGetSetWhere(){
+        where = new String[] {"Indianapolis"};
+        request.setWhere(where);
+        assertEquals(where, request.getWhere());
+    }
+
+    @Test
+    @DisplayName("lennoxxx: Test size of where")
+    public void testSizeWhere(){
+        where = new String[] {"Indianapolis", "Denver"};
+        request.setWhere(where);
+        assertEquals(2, request.getWhere().length);
+    }
+
+    @Test
+    @DisplayName("lennoxxx: Test if where is set to null")
+    public void testNullWhere(){
+        request.setWhere(null);
+        assertNull(request.getWhere());
+    }
+
 }

@@ -21,10 +21,10 @@ public class FindRequest extends Request{
     public void setLimit(Integer limit){
         this.limit = limit;
     }
-
-    public Integer getLimit(){return limit;}
-    
     public void setWhere(String[] where){
         this.where = where;
     }
+
+    public Integer getLimit(){return limit;}
+    public String[] getWhere(){return where;}
 }
