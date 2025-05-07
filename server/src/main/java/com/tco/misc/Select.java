@@ -37,7 +37,12 @@ public class Select {
         String orderBy = "ORDER BY ABS(lat - " + place.get("latitude") + ") + ABS(lng - " + place.get("longitude") + ") ";
         return statement(where, COLUMNS + " ", orderBy + "LIMIT " + limit);
     }
-
+    static String found(String match, List<String> type, List<String> here) {
+        String joined = String.join(",", type); // cities
+        String joineds = String.join(",", here);
+        String where = " WHERE " + type + " LIKE \"%" + match + "%\" AND country IN (" + here + " )";
+    return null;
+    }
     private static String statement(String where, String data, String limit) {
         return "SELECT "
                   + data
@@ -49,7 +54,5 @@ public class Select {
     static String find(String match,List<String> type, List<String> here, int limit) {
         return null;
     }
-    static String found(String match, List<String> type, List<String> here) {
-    return null;
-    }
+    
 }
