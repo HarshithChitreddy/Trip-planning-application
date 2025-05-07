@@ -36,7 +36,7 @@ public class TourRequest extends Request {
 
     private void validateFormula() throws BadRequestException {
         if (formula == null) {
-            this.formula = "vincenty";
+            return;
         }
 
         if (!(formula.equalsIgnoreCase("haversine") ||
