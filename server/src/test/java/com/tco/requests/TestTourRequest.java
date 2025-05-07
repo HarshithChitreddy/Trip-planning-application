@@ -88,19 +88,19 @@ public class TestTourRequest {
         assertEquals(3, tourRequest.getPlaces().size());
     }
 
-    //@Test
-    //@DisplayName("reddy17: Test buildResponse() with null formula defaults to vincenty")
-    //public void testBuildResponseWithNullFormula() throws BadRequestException {
-    //    testPlaces.add(place1);
-    //    testPlaces.add(place2);
-    //    tourRequest.setPlaces(testPlaces);
-    //    tourRequest.setFormula(null);
-    //    tourRequest.setEarthRadius(earthRadius);
-    //    tourRequest.setResponse(response);
+    @Test
+    @DisplayName("reddy17: Test buildResponse() with null formula defaults to vincenty")
+    public void testBuildResponseWithNullFormula() throws BadRequestException {
+        testPlaces.add(place1);
+        testPlaces.add(place2);
+        tourRequest.setPlaces(testPlaces);
+        tourRequest.setFormula(null);
+        tourRequest.setEarthRadius(earthRadius);
+        tourRequest.setResponse(response);
     
-    //    tourRequest.buildResponse();
-    //    assertEquals("vincenty", tourRequest.getFormula());
-    //}
+        tourRequest.buildResponse();
+        assertEquals(null, tourRequest.getFormula());
+    }
         
     @Test
     @DisplayName("reddy17: buildResponse with cosines formula works")
