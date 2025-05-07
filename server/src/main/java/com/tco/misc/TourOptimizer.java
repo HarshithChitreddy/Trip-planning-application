@@ -34,7 +34,9 @@ public abstract class TourOptimizer {
  
        
     }
-    return convertToPlaces(bestTour,places);
+
+    int[] reorderedTour = reorderTour(bestTour);
+    return convertToPlaces(reorderedTour,places);
 }
  
  
@@ -49,6 +51,29 @@ private Places convertToPlaces(int[] bestTour,Places places){
     }
     this.placesFinal = tour;
     return tour;
+}
+
+private int[] reorderTour(int[] bestTour) {
+    int index = 0;
+    int[] newOrder = new int[bestTour.length];
+    int tracker = 0;
+    
+    // find original starting places
+    for (int i = 0; i < bestTour.length; ++i) {
+        if (bestTour[i] == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    while (tracker < bestTour.length) {
+        newOrder[tracker] = bestTour[index % bestTour.length];
+        ++tracker;
+        ++index;
+    }
+
+    return newOrder;
+
 }
  
 private long sumOfDistance(int[] currentTour, Places places, Double radius){
