@@ -18,7 +18,7 @@ public class ThreeOptimizer extends TourOptimizer {
         }
 
         this.earthRadius = radius;
-        this.responseTime = response * 1000; // convert to milliseconds
+        this.responseTime = response * 1000; 
         this.calculator = new CalculatorFactory().get(formula); 
         this.startTime = System.currentTimeMillis();
     }
@@ -58,7 +58,7 @@ public class ThreeOptimizer extends TourOptimizer {
         if (newDistance < originalDistance) {
             return true;
         } else {
-            reverseSegment(i + 1, k); // Undo the change
+            reverseSegment(i + 1, k); 
             return false;
         }
     }
