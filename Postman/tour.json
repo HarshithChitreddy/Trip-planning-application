@@ -203,10 +203,8 @@
 					"script": {
 						"id": "285d429c-5526-4432-a6ee-aae66c25b79a",
 						"exec": [
-							"pm.test(\"reddy17: Latitude and Longitude are strings\", () => {\r",
-							"    const place = pm.response.json().places[0];\r",
-							"    pm.expect(place.latitude).to.be.a(\"string\");\r",
-							"    pm.expect(place.longitude).to.be.a(\"string\");\r",
+							"pm.test(\"reddy17: Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							""
 						],
@@ -357,6 +355,55 @@
 				}
 			],
 			"id": "067143c5-a57b-499c-8731-16885c5128f9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.9,\r\n    \"formula\": \"vincenty\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.034500\",\r\n            \"longitude\": \"-85.030339\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reddy17: Municipality and country are correct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "285d429c-5526-4432-a6ee-aae66c25b79a",
+						"exec": [
+							"pm.test(\"reddy17: Municipality and country are correct\", () => {\r",
+							"    const place = pm.response.json().places[0];\r",
+							"    pm.expect(place.municipality).to.eql(\"LaGrange\");\r",
+							"    pm.expect(place.country).to.eql(\"United States\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fd12044f-f96a-4e01-8f27-126eb4ddf5a6",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
