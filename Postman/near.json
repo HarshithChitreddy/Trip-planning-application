@@ -97,6 +97,98 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "lennoxxx: Test haversine near",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "faf3a2c1-9ba1-4e82-bd2d-a465601376ae",
+						"exec": [
+							"pm.test(\"lennoxxx: Response status is 200.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b59b9445-6f9a-4985-a7d5-d063574d1e98",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\" : \"near\",\r\n    \"place\" : {\"latitude\": \"-38.9876\", \"longitude\": \"-127.3349\"},\r\n    \"distance\" : 5,\r\n    \"earthRadius\" : 2597,\r\n    \"formula\" : \"haversine\",\r\n    \"limit\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lennoxxx: Test cosines near",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8293de9-b704-47be-9c42-04e65d82c475",
+						"exec": [
+							"pm.test(\"lennoxxx: Response status is 200.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f83a6703-c9ae-4dd4-91ce-49fc99eed2d9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\" : \"near\",\r\n    \"place\" : {\"latitude\": \"80.00\", \"longitude\": \"-80.00\"},\r\n    \"distance\" : 3,\r\n    \"earthRadius\" : 2597,\r\n    \"formula\" : \"cosines\",\r\n    \"limit\" : 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
