@@ -10,14 +10,26 @@ public class FindRequest extends Request{
     protected Integer limit;
     protected String match;
     protected List<String> type;
-    protected String[] where;
+    protected List<String> where;
     protected Integer found;
     private static final transient Logger log = LoggerFactory.getLogger(NearRequest.class);
 
     @Override
     public void buildResponse() throws BadRequestException{
+        GeographicLocations geoLoc = new GeographicLocations();
+        this.type = geoLoc.getTypes();
         
+       
+    try {
+        this.found = geoLoc.found(match, type, where);
+        places = geoLoc.find(match, type, where, limit);
+    } catch (Exception e) {
+        throw new BadRequestException();
     }
+
+
+    log.trace("buildResponse -> {}", this);
+}
     public void setMatch(String match){
         this.match = match;
     }
@@ -26,10 +38,10 @@ public class FindRequest extends Request{
     public void setLimit(Integer limit){
         this.limit = limit;
     }
-    public void setWhere(String[] where){
+    public void setWhere(List<String> where){
         this.where = where;
     }
 
     public Integer getLimit(){return limit;}
-    public String[] getWhere(){return where;}
+    public List<String> getWhere(){return where;}
 }
