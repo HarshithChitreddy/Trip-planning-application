@@ -18,6 +18,11 @@ public class FindRequest extends Request{
     public void buildResponse() throws BadRequestException{
         
     }
+    public void setMatch(String match){
+        this.match = match;
+    }
+    public String getMatch() { return match; }
+    
     public void setLimit(Integer limit){
         this.limit = limit;
     }
