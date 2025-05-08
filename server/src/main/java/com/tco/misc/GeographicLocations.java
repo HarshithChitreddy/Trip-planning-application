@@ -24,7 +24,11 @@ public class GeographicLocations {
         }
         
     }
+    public Integer found(String match, List<String> type, String[] where) throws Exception{
 
+        return null;
+ 
+     }
     public Distances distances(Place place, Places places) {
         Distances distances = new Distances();
         
