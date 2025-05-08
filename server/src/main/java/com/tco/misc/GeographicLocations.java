@@ -34,7 +34,11 @@ public class GeographicLocations {
 
         return distances;
     }
+    public Places find(String match, List<String> type, String[] where, Integer limit) throws Exception{
 
+
+        return null;
+    }
     public List<String> getTypes() {
         List<String> types = new ArrayList<>();
         types.add("city");
