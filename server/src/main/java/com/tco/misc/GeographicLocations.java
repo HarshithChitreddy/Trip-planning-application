@@ -24,7 +24,7 @@ public class GeographicLocations {
         }
         
     }
-    public Integer found(String match, List<String> type, String[] where) throws Exception{
+    public Integer found(String match, List<String> type, List<String> where) throws Exception{
 
         return null;
  

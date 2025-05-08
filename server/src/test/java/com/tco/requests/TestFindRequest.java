@@ -1,5 +1,6 @@
 package com.tco.requests;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -9,11 +10,12 @@ class FindRequestTest {
 
     private FindRequest request;
     private Integer limit;
-    private String[] where;
+    private List<String> where;
 
     @BeforeEach
     void setUp() {
         request = new FindRequest();
+        where = new ArrayList<>();
     }
 
     @Test
@@ -33,7 +35,7 @@ class FindRequestTest {
     @Test
     @DisplayName("lennoxxx: Test get/set where")
     public void testGetSetWhere(){
-        where = new String[] {"Indianapolis"};
+        where.add("Indianapolis");
         request.setWhere(where);
         assertEquals(where, request.getWhere());
     }
@@ -41,9 +43,10 @@ class FindRequestTest {
     @Test
     @DisplayName("lennoxxx: Test size of where")
     public void testSizeWhere(){
-        where = new String[] {"Indianapolis", "Denver"};
+        where.add("Indianapolis");
+        where.add("Denver");
         request.setWhere(where);
-        assertEquals(2, request.getWhere().length);
+        assertEquals(2, request.getWhere().size());
     }
 
     @Test
