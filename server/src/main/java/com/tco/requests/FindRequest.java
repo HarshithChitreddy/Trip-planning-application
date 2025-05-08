@@ -46,4 +46,7 @@ public class FindRequest extends Request{
     public List<String> getWhere(){return where;}
 
     public Places getPlaces(){return places;}
+    public void setPlaces(Places places){
+        this.places = places;
+    }
 }

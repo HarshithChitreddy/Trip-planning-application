@@ -11,11 +11,13 @@ class FindRequestTest {
     private FindRequest request;
     private Integer limit;
     private List<String> where;
+    private Places places;
 
     @BeforeEach
     void setUp() {
         request = new FindRequest();
         where = new ArrayList<>();
+        places = new Places();
     }
 
     @Test
@@ -50,10 +52,15 @@ class FindRequestTest {
     }
 
     @Test
-    @DisplayName("lennoxxx: Test if where is set to null")
-    public void testNullWhere(){
-        request.setWhere(null);
-        assertNull(request.getWhere());
+    @DisplayName("lennoxxx: Test get/set places")
+    public void testSetAndGetPlaces() {
+        request.setPlaces(places);
+        assertEquals(places, request.getPlaces());
     }
-
+    @Test
+    @DisplayName("lennoxxx: Test places null")
+    public void testNullPlaces() {
+        request.setPlaces(null);
+        assertNull(request.getPlaces());
+    }
 }
