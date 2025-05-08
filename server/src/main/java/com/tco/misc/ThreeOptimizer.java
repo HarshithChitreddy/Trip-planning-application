@@ -18,7 +18,7 @@ public class ThreeOptimizer extends TourOptimizer {
         }
 
         this.earthRadius = radius;
-        this.responseTime = response * 1000;
+        this.responseTime = response * 1000; 
         this.calculator = new CalculatorFactory().get(formula); 
         this.startTime = System.currentTimeMillis();
     }
@@ -30,7 +30,6 @@ public class ThreeOptimizer extends TourOptimizer {
         }
 
         boolean improved;
-
         do {
             improved = false;
 
@@ -42,19 +41,26 @@ public class ThreeOptimizer extends TourOptimizer {
                             return;
                         }
 
-                        long original = segmentDistance(i, j, k);
-                        reverseSegment(i + 1, k);
-                        long improvedDist = segmentDistance(i, j, k);
-
-                        if (improvedDist < original) {
+                        if (tryImproveSegment(i, j, k)) {
                             improved = true;
-                        } else {
-                            reverseSegment(i + 1, k);
                         }
                     }
                 }
             }
         } while (improved);
+    }
+
+    private boolean tryImproveSegment(int i, int j, int k) {
+        long originalDistance = segmentDistance(i, j, k);
+        reverseSegment(i + 1, k);
+        long newDistance = segmentDistance(i, j, k);
+
+        if (newDistance < originalDistance) {
+            return true;
+        } else {
+            reverseSegment(i + 1, k); 
+            return false;
+        }
     }
 
     private long segmentDistance(int i, int j, int k) {
@@ -81,6 +87,7 @@ public class ThreeOptimizer extends TourOptimizer {
     public Places getOptimizedTour() {
         return currentTour;
     }
+
     public DistanceCalculator getCalculator() {
         return calculator;
     }
