@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "42367966-308a-4ab7-b488-449a9f8378dc",
+		"name": "near",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "42701366-42367966-308a-4ab7-b488-449a9f8378dc"
+	},
+	"item": [
+		{
+			"name": "lennoxxx: Test Near",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef4822ad-9c23-4cd2-96e8-3d5cd74d46da",
+						"exec": [
+							"pm.test(\"dnweath: Response status is 200.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "24b29ee9-0c51-45ab-84a5-c4ba8e1b674c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\" : \"near\",\r\n    \"place\" : {\"latitude\": \"40.1876\", \"longitude\": \"-30.8912\"},\r\n    \"distance\" : 8,\r\n    \"earthRadius\" : 2597,\r\n    \"formula\" : \"vincenty\",\r\n    \"limit\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
