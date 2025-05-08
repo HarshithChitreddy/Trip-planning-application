@@ -1044,6 +1044,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "chrisc23: benchmark for less than 1 second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b176e8b1-1a15-4f41-9d9d-dc5f442ac6d1",
+						"exec": [
+							"pm.test(\"chrisc23: Response time should be under 1 second\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9b322c31-e1fe-4f84-b103-f0dbdb6a9c96",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 2532,\r\n    \"response\": 0.5,\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Japan\",\r\n            \"latitude\": \"36.2\",\r\n            \"longitude\": \"138.2\"\r\n        },\r\n        {\r\n            \"name\": \"Nigeria\",\r\n            \"latitude\": \"9.0\",\r\n            \"longitude\": \"8.6\"\r\n        },\r\n        {\r\n            \"name\": \"Wild Leap Brew Co.\",\r\n            \"municipality\": \"LaGrange\",\r\n            \"region\": \"Georgia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.034500\",\r\n            \"longitude\": \"-85.030339\"\r\n        },\r\n        {\r\n            \"name\": \"Go Brewing\",\r\n            \"municipality\": \"Naperville\",\r\n            \"region\": \"Illinois\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"41.7761\",\r\n            \"longitude\": \"-88.1906\"\r\n        },\r\n        {\r\n            \"name\": \"Eastern Market Brewing Co.\",\r\n            \"municipality\": \"Detroit\",\r\n            \"region\": \"Michigan\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"42.346743\",\r\n            \"longitude\": \"-83.038791\"\r\n        },\r\n        {\r\n            \"name\": \"Death of the Fox Brewing Company\",\r\n            \"municipality\": \"Clarksboro\",\r\n            \"region\": \"New Jersey\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"39.814703\",\r\n            \"longitude\": \"-75.224882\"\r\n        },\r\n        {\r\n            \"name\": \"Deschutes Brewery\",\r\n            \"municipality\": \"Bend\",\r\n            \"region\": \"Oregon\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"44.058174\",\r\n            \"longitude\": \"-121.315308\"\r\n        },\r\n        {\r\n            \"name\": \"Concord Craft Brewing\",\r\n            \"municipality\": \"Concord\",\r\n            \"region\": \"New Hampshire\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"43.209970\",\r\n            \"longitude\": \"-71.516551\"\r\n        },\r\n        {\r\n            \"name\": \"Starhill Brewery\",\r\n            \"municipality\": \"Crozet\",\r\n            \"region\": \"Virginia\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"38.0691\",\r\n            \"longitude\": \"-78.687\"\r\n        },\r\n        {\r\n            \"name\": \"Zero Gravity Brewing\",\r\n            \"municipality\": \"Burlington\",\r\n            \"region\": \"Vermont\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"44.459444\",\r\n            \"longitude\": \"-73.213611\"\r\n        },\r\n        {\r\n            \"name\": \"Circle and Square Brewing Company\",\r\n            \"municipality\": \"Oxford\",\r\n            \"region\": \"Mississippi\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"34.367778\",\r\n            \"longitude\": \"-89.5275\"\r\n        },\r\n        {\r\n            \"name\": \"Sierra Nevada Brewing Co.\",\r\n            \"municipality\": \"Chico\",\r\n            \"region\": \"California\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"39.723361\",\r\n            \"longitude\": \"-121.815962\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
