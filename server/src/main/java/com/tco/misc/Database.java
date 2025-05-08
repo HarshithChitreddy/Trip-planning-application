@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.List;
 
 import com.tco.requests.Place;
 import com.tco.requests.Places;
@@ -55,6 +56,11 @@ public class Database {
             return results.getInt("count");
         }
         throw new Exception("No count results in found query.");
+    }
+    public Places find(String match, List<String> type, List<String> where, Integer limit) throws Exception{
+
+
+        return null;
     }
     static Integer found(String sql) throws Exception {
 
