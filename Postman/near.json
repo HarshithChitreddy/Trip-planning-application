@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "lennoxxx: Test Near",
+			"name": "lennoxxx: Test Near vincenty",
 			"event": [
 				{
 					"listen": "test",
@@ -33,6 +33,52 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"requestType\" : \"near\",\r\n    \"place\" : {\"latitude\": \"40.1876\", \"longitude\": \"-30.8912\"},\r\n    \"distance\" : 8,\r\n    \"earthRadius\" : 2597,\r\n    \"formula\" : \"vincenty\",\r\n    \"limit\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lennoxxx: Test invalid near formula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f009eba2-1051-4d2c-8d6d-8432de0731eb",
+						"exec": [
+							"pm.test(\"lennoxxx: Response status is 400.\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e5cbf1e9-62d7-4a34-a3cf-8254f177a812",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\" : \"near\",\r\n    \"place\" : {\"latitude\": \"27.98164\", \"longitude\": \"-120.00476\"},\r\n    \"distance\" : 4,\r\n    \"earthRadius\" : 2597,\r\n    \"formula\" : \"Bread\",\r\n    \"limit\" : 5\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
