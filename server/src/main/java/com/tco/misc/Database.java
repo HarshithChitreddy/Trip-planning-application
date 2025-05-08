@@ -60,7 +60,7 @@ public class Database {
     public Places find(String match, List<String> type, List<String> where, Integer limit) throws Exception{
 
 
-        return null;
+        return Database.places(Select.find(match, type, where, limit), limit);
     }
     static Integer found(String sql) throws Exception {
 
