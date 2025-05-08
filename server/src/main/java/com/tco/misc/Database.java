@@ -56,4 +56,18 @@ public class Database {
         }
         throw new Exception("No count results in found query.");
     }
+    static Integer found(String sql) throws Exception {
+
+        try (
+              // connect to the database and query
+              Connection conn = DriverManager.getConnection(Credential.URL, Credential.USER,
+                    Credential.PASSWORD);
+              Statement query = conn.createStatement();
+              ResultSet results = query.executeQuery(sql)
+        ) {
+            return count(results);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
