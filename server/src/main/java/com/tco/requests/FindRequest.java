@@ -44,4 +44,6 @@ public class FindRequest extends Request{
 
     public Integer getLimit(){return limit;}
     public List<String> getWhere(){return where;}
+
+    public Places getPlaces(){return places;}
 }
