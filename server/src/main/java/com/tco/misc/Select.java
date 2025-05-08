@@ -40,9 +40,17 @@ public class Select {
     static String found(String match, List<String> type, List<String> here) {
         String joined = String.join(",", type); // cities
         String joineds = String.join(",", here);
-        String where = " WHERE " + type + " LIKE \"%" + match + "%\" AND country IN (" + here + " )";
-    return null;
+        String where = " WHERE " + joined + " LIKE \"%" + match + "%\" AND country IN (" + joineds + " )";
+        return statement(where, "COUNT(*) AS count ", "");
     }
+    static String find(String match,List<String> type, String[] here, int limit) {
+        String joineds = String.join(",", here);
+        String joined = String.join(",", type);
+        String where = " WHERE " + joined + " LIKE \"%" + match + "%\" AND country IN (" + joineds + ")";
+         return statement(where, COLUMNS + " ", "LIMIT " + limit);
+        
+    }
+    
     private static String statement(String where, String data, String limit) {
         return "SELECT "
                   + data
@@ -51,8 +59,6 @@ public class Select {
                   + limit
                   + " ;";
     }
-    static String find(String match,List<String> type, List<String> here, int limit) {
-        return null;
-    }
+    
     
 }
