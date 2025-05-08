@@ -55,7 +55,7 @@ public class People extends ArrayList<Person> {
     final String name = "Harshith Reddy Chitreddy";
     final String netid = "reddy17";
     final String hometown = "Hyderabad, India";
-    final String bio = "I am an international student from India, studying Computer Science at CSU. I have experience in cybersecurity and full-stack development, working with the MERN stack to build responsive and user-friendly applications. I’m passionate about using my skills to solve real-world problems and contribute to meaningful projects. I aspire to be a Software Engineer and constantly work on improving my skills. In my free time, I watch YouTube and also practice LeetCode to get better at problem-solving.";
+    final String bio = "I'm an international student from India, studying Computer Science at CSU. I'm really passionate about building websites and creating responsive, user-friendly applications using the MERN stack. I also have experience in cybersecurity and love using my skills to solve real-world problems and contribute to meaningful projects. I aspire to become a Software Engineer and am always working to improve my skills. In my free time, I enjoy watching YouTube and practicing LeetCode to get better at problem solving.";
 
     return new Person(name, netid, hometown, bio);
   }
