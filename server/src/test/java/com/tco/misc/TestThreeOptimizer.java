@@ -174,6 +174,19 @@ public class TestThreeOptimizer {
         assertTrue(after <= before, "Tour with outlier should still be optimized");
     }
 
+    @Test
+    @DisplayName("reddy17: optimizer should respect short timeout on large tour")
+    public void testLargeTourTimeout() throws BadRequestException {
+        Places largeTour = new Places();
+        for (int i = 0; i < 100; i++) {
+            largeTour.add(createPlace(String.valueOf(i), String.valueOf(i)));
+        }
+    
+        ThreeOptimizer optimizer = new ThreeOptimizer(largeTour, 6371.0, "vincenty", 0.001); 
+        assertDoesNotThrow(optimizer::improve);
+    }
+    
+
     private long getTotalDistance(Places tour, ThreeOptimizer optimizer) {
         long total = 0;
         for (int i = 0; i < tour.size(); i++) {
