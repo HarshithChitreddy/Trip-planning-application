@@ -34,7 +34,7 @@ public class GeographicLocations {
 
         return distances;
     }
-    public Places find(String match, List<String> type, String[] where, Integer limit) throws Exception{
+    public Places find(String match, List<String> type, List<String> where, Integer limit) throws Exception{
 
 
         return Database.places(Select.find(match, type, where, limit), limit);
