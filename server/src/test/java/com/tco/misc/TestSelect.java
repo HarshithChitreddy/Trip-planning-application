@@ -59,5 +59,31 @@ public class TestSelect {
         assertTrue(sql.contains("lng BETWEEN"));
         assertTrue(sql.contains("LIMIT 5"));
     }
+
+    @Test
+    @DisplayName("dnweath: Values close to 180 wrap properly")
+    public void testLargeLonRange(){
+        place.put("latitude", "50");
+        place.put("longitude", "179.9");
+
+        String query = Select.near(limit, place, distance);
+        
+        String[] queryElements = query.split(" ");
+        
+        assertTrue(queryElements[16].equals("180.65094631288915"));
+    }
+
+    @Test
+    @DisplayName("dnweath: Values close to -180 wrap properly")
+    public void testSmallLonRange(){
+        place.put("latitude", "50");
+        place.put("longitude", "-179.9");
+
+        String query = Select.near(limit, place, distance);
+        
+        String[] queryElements = query.split(" ");
+        
+        assertTrue(queryElements[14].equals("-180.65094631288915"));
+    }
     
 }
