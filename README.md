@@ -3,7 +3,7 @@
 This is a collaborative team project developed as part of CSU's CS314: Software Engineering (Spring 2025).  
 The application allows users to plan global trips efficiently, using a mobile-first design approach and a full-stack Java + React architecture.
 
-> This repository is a **personal copy** of the original team repo. It includes all team contributions, but is hosted here for portfolio/demo purposes.  
+This repository is a **personal copy** of the original team repo
 
 ---
 
